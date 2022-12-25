@@ -1,5 +1,7 @@
 package lk.wda.localauthwebsite.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -8,6 +10,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "local_authority")
+@JsonIgnoreProperties({"images", "applications", "contacts"})
 public class LocalAuthority extends BaseModel {
     @Column(nullable = false)
     private String district;
@@ -15,7 +18,7 @@ public class LocalAuthority extends BaseModel {
     @Column(nullable = false)
     private String name;
 
-    @Column
+    @Column(columnDefinition = "TEXT")
     private String favicon;
 
     @Column

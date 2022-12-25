@@ -9,7 +9,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "image")
 public class Image extends BaseModel {
-    @Column
+    @Column(columnDefinition = "TEXT")
     private String url;
 
     @Column(length = 40)

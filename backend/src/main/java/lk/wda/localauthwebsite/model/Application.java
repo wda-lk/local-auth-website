@@ -12,7 +12,7 @@ public class Application extends BaseModel {
     @Column
     private String name;
 
-    @Column
+    @Column(columnDefinition = "TEXT")
     private String file;
 
     @ManyToOne
