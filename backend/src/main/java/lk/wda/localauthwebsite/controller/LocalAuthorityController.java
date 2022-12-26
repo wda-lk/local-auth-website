@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/local-auths")
@@ -29,7 +28,7 @@ public class LocalAuthorityController {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Optional<LocalAuthority> getLocalAuthoritiesById(@PathVariable long id) {
-        return localAuthorityRepository.findById(id);
+    public List<LocalAuthority> getLocalAuthoritiesByDistrictId(@PathVariable long id) {
+        return localAuthorityRepository.findAllByDistrictId(id);
     }
 }

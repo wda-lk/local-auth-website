@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.List;
@@ -12,8 +14,6 @@ import java.util.List;
 @Table(name = "local_authority")
 @JsonIgnoreProperties({"images", "applications", "contacts"})
 public class LocalAuthority extends BaseModel {
-    @Column(nullable = false)
-    private String district;
 
     @Column(nullable = false)
     private String name;
@@ -27,6 +27,10 @@ public class LocalAuthority extends BaseModel {
     @Column
     private String missionStatement;
 
+    @ManyToOne
+    @JoinColumn(name = "district_id")
+    private District district;
+
     @OneToMany(mappedBy = "localAuthority")
     private List<Image> images;
 
@@ -37,14 +41,6 @@ public class LocalAuthority extends BaseModel {
     private List<Contact> contacts;
 
     public LocalAuthority() {
-    }
-
-    public String getDistrict() {
-        return district;
-    }
-
-    public void setDistrict(String district) {
-        this.district = district;
     }
 
     public String getName() {
@@ -77,6 +73,14 @@ public class LocalAuthority extends BaseModel {
 
     public void setMissionStatement(String missionStatement) {
         this.missionStatement = missionStatement;
+    }
+
+    public District getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(District district) {
+        this.district = district;
     }
 
     public List<Image> getImages() {
