@@ -172,7 +172,6 @@
 				type: "GET",
 				url: `http://localhost:8080/api/applications?local-auth-id=${localAuthorityId}`,
 				success: function (result) {
-					console.log(result)
 					template = $("#application-row-tmpl").html()
 					rendered = Mustache.render(template, result)
 					$("#application-table").append(rendered)
