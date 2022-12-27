@@ -21,6 +21,9 @@ public class LocalAuthority extends BaseModel {
     @Column(columnDefinition = "TEXT")
     private String favicon;
 
+    @Column(columnDefinition = "TEXT")
+    private String logo;
+
     @Column
     private String viewStatement;
 
@@ -57,6 +60,14 @@ public class LocalAuthority extends BaseModel {
 
     public void setFavicon(String favicon) {
         this.favicon = favicon;
+    }
+
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
     }
 
     public String getViewStatement() {
