@@ -83,108 +83,6 @@
 								</td>
 								<td>037 494 78 42</td>
 							</tr>
-							<tr>
-								<th scope="row">02</th>
-								<td>ලේකම්</td>
-								<td></td>
-								<td>037 494 78 44</td>
-							</tr>
-							<tr>
-								<th scope="row">03</th>
-								<td>පරිපාලන නිලධාරී</td>
-								<td></td>
-								<td>037 494 78 46</td>
-							</tr>
-							<tr>
-								<th scope="row">04</th>
-								<td>පෙරටු කාර්යාලය</td>
-								<td></td>
-								<td>037 494 77 98</td>
-							</tr>
-							<tr>
-								<th scope="row">05</th>
-								<td>ආදායම් ප්‍රවර්ධන නිලධාරී</td>
-								<td>ආදායම්</td>
-								<td>037 494 78 53</td>
-							</tr>
-							<tr>
-								<th scope="row">06</th>
-								<td>වැඩ අදිකාරී</td>
-								<td>කර්මාන්ත</td>
-								<td>037 494 78 51</td>
-							</tr>
-							<tr>
-								<th scope="row">07</th>
-								<td>මහජන සෞඛ්‍ය පරීක්ෂක</td>
-								<td>සෞඛ්‍ය</td>
-								<td>037 494 78 52</td>
-							</tr>
-							<tr>
-								<th scope="row">08</th>
-								<td>ප්‍රජා සංවර්ධන නිලධාරී</td>
-								<td>ප්‍රජා සංවර්ධන</td>
-								<td>037 494 78 54</td>
-							</tr>
-							<tr>
-								<th scope="row">09</th>
-								<td>මූල්‍ය නිලධාරී</td>
-								<td>ගිණුම් අංශය</td>
-								<td>037 494 78 50</td>
-							</tr>
-							<tr>
-								<th scope="row">10</th>
-								<td>ප්‍රධාන කළමනාකරණ සේවා නිලධාරී</td>
-								<td>ආයතන අංශය</td>
-								<td>037 494 78 48</td>
-							</tr>
-							<tr>
-								<th scope="row">11</th>
-								<td>ඝණ&nbsp;අපද්‍රව්‍ය නිලධාරී</td>
-								<td>ඝණ අපද්‍රව්‍ය</td>
-								<td>037 494 78 55</td>
-							</tr>
-							<tr>
-								<th scope="row">12</th>
-								<td>පුස්තකාලාධිපති</td>
-								<td>මහජන පුස්තකාලය</td>
-								<td>037 494 78 59</td>
-							</tr>
-							<tr>
-								<th scope="row">13</th>
-								<td>ආයුර්වේද වෛද්‍ය නිලධාරී</td>
-								<td>ආයුර්වේදය</td>
-								<td>037 494 78 58</td>
-							</tr>
-							<tr>
-								<th scope="row">14</th>
-								<td>වැඩ පරිපාලක</td>
-								<td>කොම්පොස්ට් අංගනය</td>
-								<td>037 494 78 64</td>
-							</tr>
-							<tr>
-								<th scope="row">15</th>
-								<td>පෙර පාසල් පාළිකා</td>
-								<td>පෙර පාසල</td>
-								<td>037 494 78 63</td>
-							</tr>
-							<tr>
-								<th scope="row">16</th>
-								<td>ආදාහනාගාර භාරකරු</td>
-								<td>ආදාහනාගාරය</td>
-								<td>037 494 78 62</td>
-							</tr>
-							<tr>
-								<th scope="row">17</th>
-								<td>ජල පවිත්‍රාගාර භාරකරු</td>
-								<td>ජලපවිත්‍රාගාරය</td>
-								<td>037 494 78 65</td>
-							</tr>
-							<tr>
-								<th scope="row">18</th>
-								<td>ආරක්ෂක නිලධාරී</td>
-								<td>ආරක්ෂක අංශය</td>
-								<td>037 494 78 56</td>
-							</tr>
 							</tbody>
 						</table>
 					</div>
@@ -254,7 +152,7 @@
 	</script>
 
 	<script id="navi-logo-tmpl" type="x-tmpl-mustache">
-			<img src={{favicon}} width="100" height="36">
+			<img src={{logo}} width="90" height="90">
 	</script>
 
 	<script>
@@ -274,6 +172,19 @@
 			template = $("#navi-logo-tmpl").html()
 			rendered = Mustache.render(template, localAuthorityObj)
 			$("#logo-nav").append(rendered)
+
+			$.ajax({
+				type: "GET", url: `http://localhost:8080/api/contacts?local-auth-id=${localAuthorityId}`,
+				success: function (result) {
+					console.log(result)
+					// template = $("#statements-tmpl").html()
+					// rendered = Mustache.render(template, result)
+					// $("#statements-text").append(rendered)
+				},
+				error: function (xhr) {
+					console.log(`An error occurred: ${xhr.status} ${xhr.statusText}`)
+				}
+			})
 		})
 	</script>
 </html>
