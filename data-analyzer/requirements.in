@@ -4,3 +4,4 @@ google-auth-oauthlib
 loguru
 pandas
 requests
+tenacity

@@ -210,5 +210,5 @@ tags
 .gitconfig
 
 # API clients token files
-src/multibajajmgt/client/**/credentials.json
-src/multibajajmgt/client/**/token.json
+src/analyzer/client/**/credentials.json
+src/analyzer/client/**/token.json
