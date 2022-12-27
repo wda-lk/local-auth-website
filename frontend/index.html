@@ -26,8 +26,8 @@
 	<body>
 		<!-- Navigation -->
 		<div class="container-fluid" style="background-color:#900; margin-bottom:20px;">
-			<div class="row text-sm-left" style="align-items: center; justify-content: space-between;">
-				<div class="col-sm-5">
+			<div class="row" style="align-items: center; justify-content: space-between; height:100px;">
+				<div class="col-md-5 text-md-center">
 					<h4 class="title-top">DEPARTMENT OF LOCAL GOVERNMENT</h4>
 				</div>
 				<div class="col-sm-2" style="margin-top:10px; margin-bottom:10px;">
@@ -107,6 +107,7 @@
 			let homeButton = $("#home-button")
 			let districtId
 			let localAuthorityId
+			let localAuthorityObj
 
 			districtPicker.on("change", function () {
 				// Remove selected option
@@ -118,7 +119,11 @@
 					type: "GET",
 					url: `http://localhost:8080/api/local-auths?district-id=${districtId}`,
 					success: function (result) {
-						let template = "{{#.}}<option value={{id}}>{{name}}</option>{{/.}}"
+						let template = "{{#.}}" +
+						               "<option value={{id}} data-name={{name}} data-favicon={{favicon}} data-logo={{favicon}}>" +
+						               "{{name}}" +
+						               "</option>" +
+						               "{{/.}}"
 						localAuthorityPicker.append(Mustache.render(template, result))
 						localAuthorityPicker.prop("disabled", false)
 						localAuthorityPicker.selectpicker("render")
@@ -132,6 +137,12 @@
 
 			localAuthorityPicker.on("change", function () {
 				localAuthorityId = this.value
+				let selectedOption = $(this).find(":selected")
+				localAuthorityObj = {
+					"name" : selectedOption.data("name"),
+					"favicon": selectedOption.data("favicon"),
+					"logo": selectedOption.data("logo")
+				}
 				homeButton.prop("disabled", false)
 			})
 
@@ -139,6 +150,7 @@
 			homeButton.on("click", function () {
 				localStorage.setItem("districtId", districtId)
 				localStorage.setItem("localAuthorityId", localAuthorityId)
+				localStorage.setItem("localAuthorityObj", JSON.stringify(localAuthorityObj))
 				window.location.href = "./home.html"
 			})
 
@@ -146,7 +158,7 @@
 			$.ajax({
 				type: "GET", url: "http://localhost:8080/api/districts",
 				success: function (result) {
-					let template = "{{#.}}<option value={{id}} obj={{.}}>{{name}}</option>{{/.}}"
+					let template = "{{#.}}<option value={{id}}>{{name}}</option>{{/.}}"
 					districtPicker.append(Mustache.render(template, result))
 					districtPicker.prop("disabled", false)
 					districtPicker.selectpicker("render")

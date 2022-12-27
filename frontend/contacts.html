@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+	<!-- Make sure a District and Local Authority is setup -->
+	<script>
+		let districtId = localStorage.getItem("districtId")
+		let localAuthorityId = localStorage.getItem("localAuthorityId")
+		let localAuthorityObj = JSON.parse(localStorage.getItem("localAuthorityObj"))
+		if (districtId == null || localAuthorityId == null) {
+			window.location.href = "./index.html"
+		}
+	</script>
+
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-		<!-- server -->
-		<title>Kuliyapitiya Urban Councial</title>
-		<!-- server -->
-		<link rel="icon" type="image/png" href="https://kuliyapitiyauc.dolgnwp.lk/images/favicon/favicon.png">
 		<!-- Bootstrap Core CSS -->
 		<link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
 		<!-- Custom CSS: You can use this stylesheet to override any Bootstrap styles and/or apply your own styles -->
@@ -25,29 +30,15 @@
 	<body>
 		<!-- Navigation -->
 		<div class="container-fluid" style="background-color:#900; margin-bottom:20px;">
-			<div class="row text-sm-left text-center">
-				<div class="col-sm-2 text-sm-right text-center" style="margin-top:10px;">
-					<!-- server -->
-					<img src="#" width="100" height="100">
-				</div>
+			<div class="row text-sm-left text-center" style="height:100px; align-items: center; justify-content: space-evenly;">
+				<div id="logo-nav" class="col-sm-2 text-sm-right text-center"></div>
 				<!-- server -->
-				<div class="col-sm-5" style="margin-top:5px;">
-					<h4 class="title-top">කුලියාපිටිය නගර සභාව</h4>
-					<h4 class="title-top">குலியபிட்டி நகர சபை</h4>
-					<h4 class="title-top">Kuliyapitiya Urban Council</h4>
-				</div>
-				<div class="col-sm-2" style="margin-top:40px;">
-				</div>
-				<!-- server -->
-				<div class="col-sm-1" style="margin-top:20px;">
-					<a href="#" style="color:#CCC; text-decoration:none;">සිංහල</a>
-					<br>
+				<div id="name-nav" class="col-sm-5"></div>
+				<div class="col-sm-1">
 					<a href="#" style="color:#CCC; text-decoration:none;">English</a>
-					<br>
-					<a href="#" style="color:#CCC; text-decoration:none;">Tamil</a>
 				</div>
-				<div class="col-sm-2" style="margin-top:20px; margin-bottom:10px;">
-					<img src="./images/logos.png" width="100" height="36">
+				<div class="col-sm-2">
+					<img src="./images/common-logo.png" width="100" height="36" alt="">
 				</div>
 			</div>
 		</div>
@@ -229,12 +220,60 @@
 		</footer>
 
 		<!-- jQuery -->
-		<script src="./js/jquery-1.11.3.min.js"></script>
-		<!-- Bootstrap Core JavaScript -->
-		<script src="./js/bootstrap.js"></script>
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		        crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"
+		        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+		        crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
+		        integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
+		        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+		        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+		        crossorigin="anonymous"></script>
+		<!-- MustacheJS -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.1.0/mustache.min.js"
+		        integrity="sha512-WJoegbZkRk/oQbcp2Nm2JfgrHHyHdhaHns2g74rXFRxxy+E+syUWQCiZxSzGo0662p/GQEVXDkg6ImtSR60DHg=="
+		        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 		<!-- IE10 viewport bug workaround -->
 		<script src="./js/ie10-viewport-bug-workaround.js"></script>
 		<!-- Placeholder Images -->
 		<script src="./js/holder.min.js"></script>
+		<!-- bootstrap-select compiled and minified JavaScript -->
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
 	</body>
+
+	<script id="meta-data-tmpl" type="x-tmpl-mustache">
+			<title>{{name}}</title>
+			<link rel="icon" type="image/png" href={{favicon}}>
+	</script>
+
+	<script id="navi-name-tmpl" type="x-tmpl-mustache">
+			<h4 class="title-top">{{name}} Council</h4>
+	</script>
+
+	<script id="navi-logo-tmpl" type="x-tmpl-mustache">
+			<img src={{favicon}} width="100" height="36">
+	</script>
+
+	<script>
+		$(document).ready(function () {
+			let template
+			let rendered
+
+			// Render head metadata
+			template = $("#meta-data-tmpl").html()
+			rendered = Mustache.render(template, localAuthorityObj)
+			$("head").append(rendered)
+
+			template = $("#navi-name-tmpl").html()
+			rendered = Mustache.render(template, localAuthorityObj)
+			$("#name-nav").append(rendered)
+
+			template = $("#navi-logo-tmpl").html()
+			rendered = Mustache.render(template, localAuthorityObj)
+			$("#logo-nav").append(rendered)
+		})
+	</script>
 </html>
