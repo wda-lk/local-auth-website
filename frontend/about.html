@@ -65,17 +65,17 @@
 				</div>
 
 				<!-- Center Column -->
-				<!-- server -->
-				<div class="col-sm-6">
-					<blockquote class="blockquote text-center">
+				<div id="statements-text" class="col-sm-6"></div>
+				<script id="statements-tmpl" type="x-tmpl-mustache">
+					<blockquote id="vision-text" class="blockquote text-center">
 						<h2 class="media-heading">දැක්ම</h2>
-						<p>සුවපත් ජීවිතයක් - අලංකාර නගරයක්</p>
+						<p>{{missionStatement}}</p>
 					</blockquote>
-					<blockquote class="blockquote text-center">
+					<blockquote id="mission-text" class="blockquote text-center">
 						<h2 class="media-heading">මෙහෙවර</h2>
-						<p>කුලියාපිටිය නගර වැසියන් විසින් ගෙවන බදු මුදල් සහ රාජ්‍ය ආධාර නිසි පරිදි කළමනාකරණය කර නාගරිකයින්ගේ යටිතල පහසුකම් සුභ සාධනය හා සැප විහරණ විධි වැඩි දියුණු කරමින් පරිසරකාමී අලංකාර නගරයක් බිහිකිරීම.</p>
+						<p>{{viewStatement}}</p>
 					</blockquote>
-				</div>
+				</script>
 
 				<!-- Right Column -->
 				<div class="col-sm-3">
@@ -161,6 +161,19 @@
 			template = $("#navi-logo-tmpl").html()
 			rendered = Mustache.render(template, localAuthorityObj)
 			$("#logo-nav").append(rendered)
+
+			$.ajax({
+				type: "GET", url: `http://localhost:8080/api/local-auths/${localAuthorityId}`,
+				success: function (result) {
+					console.log(result)
+					template = $("#statements-tmpl").html()
+					rendered = Mustache.render(template, result)
+					$("#statements-text").append(rendered)
+				},
+				error: function (xhr) {
+					console.log(`An error occurred: ${xhr.status} ${xhr.statusText}`)
+				}
+			})
 		})
 	</script>
 </html>
