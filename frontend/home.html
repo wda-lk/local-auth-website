@@ -19,6 +19,11 @@
 		<link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
 		<!-- Custom CSS: You can use this stylesheet to override any Bootstrap styles and/or apply your own styles -->
 		<link rel="stylesheet" type="text/css" href="./css/custom.css">
+		<!-- Add the slick-theme.css if you want default styling -->
+		<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+		<!-- Add the slick-theme.css if you want default styling -->
+		<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+
 		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 		<!--[if lt IE 9]>
@@ -70,24 +75,7 @@
 				</div>
 
 				<!-- Center Column -->
-				<div id="target-carousel" class="col-sm-6">
-					<br>
-				</div>
-				<script id="carousel-tmpl" type="x-tmpl-mustache">
-					<div class="carousel slide">
-						<div class="carousel-inner container-fluid">
-							{{#.}}
-							<div class="carousel-item">
-								<div class="row the-slide">
-									<div class="col-xs-7 the-slide-image-container">
-										<img src={{url}} class="the-slide-image" alt={{alt_text}}>
-									</div>
-								</div>
-							</div>
-							{{/.}}
-						</div>
-					</div>
-				</script>
+				<div id="carousel" class="col-sm-6"></div>
 
 				<!-- Right Column -->
 				<div class="col-sm-3">
@@ -135,6 +123,8 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.1.0/mustache.min.js"
 		        integrity="sha512-WJoegbZkRk/oQbcp2Nm2JfgrHHyHdhaHns2g74rXFRxxy+E+syUWQCiZxSzGo0662p/GQEVXDkg6ImtSR60DHg=="
 		        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<!-- Slick -->
+		<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 		<!-- IE10 viewport bug workaround -->
 		<script src="./js/ie10-viewport-bug-workaround.js"></script>
 		<!-- Placeholder Images -->
@@ -161,21 +151,31 @@
 			rendered = Mustache.render(template, localAuthorityObj)
 			$("#logo-nav").append(rendered)
 
-			let carousel = $("#carousel")
+			carousel = $("#carousel")
 			$.ajax({
 				type: "GET",
 				url: `http://localhost:8080/api/images?local-auth-id=${localAuthorityId}`,
 				success: function (result) {
 					console.log(result)
-					template = $("#carousel-tmpl").html()
-					rendered = Mustache.render(template, result)
-					carousel.append(rendered)
-					carousel.carousel()
+					carousel.slick({
+						slidesToShow: 1,
+						arrows: false,
+						dots: true,
+						slidesToScroll: 1,
+						autoplay: true,
+						autoplaySpeed: 2000
+					})
+					// Setup carousel
+					$.each(result, function (index, value) {
+						carousel.slick("slickAdd",
+								`<div><img src=${value.url} alt=${value.alt_text} style="width:100%; height:10%"/></div>`)
+					})
 				},
 				error: function (xhr) {
 					console.log(`An error occurred: ${xhr.status} ${xhr.statusText}`)
 				}
 			})
 		})
+
 	</script>
 </html>
