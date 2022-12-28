@@ -8,6 +8,7 @@
 		if (districtId == null || localAuthorityId == null) {
 			window.location.href = "./index.html"
 		}
+		let hostName = `${document.location.protocol}//${document.location.hostname}`
 	</script>
 
 	<head>
@@ -163,7 +164,7 @@
 			$("#logo-nav").append(rendered)
 
 			$.ajax({
-				type: "GET", url: `http://localhost:8080/api/local-auths/${localAuthorityId}`,
+				type: "GET", url: `${hostName}:8080/api/local-auths/${localAuthorityId}`,
 				success: function (result) {
 					console.log(result)
 					template = $("#statements-tmpl").html()

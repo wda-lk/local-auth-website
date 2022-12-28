@@ -8,6 +8,7 @@
 		if (districtId == null || localAuthorityId == null) {
 			window.location.href = "./index.html"
 		}
+		let hostName = `${document.location.protocol}//${document.location.hostname}`
 	</script>
 
 	<head>
@@ -172,7 +173,7 @@
 
 			$.ajax({
 				type: "GET",
-				url: `http://localhost:8080/api/contacts?local-auth-id=${localAuthorityId}`,
+				url: `${hostName}:8080/api/contacts?local-auth-id=${localAuthorityId}`,
 				success: function (result) {
 					template = $("#contacts-row-tmpl").html()
 					rendered = Mustache.render(template, result)

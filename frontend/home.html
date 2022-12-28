@@ -8,6 +8,7 @@
 		if (districtId == null || localAuthorityId == null) {
 			window.location.href = "./index.html"
 		}
+		let hostName = `${document.location.protocol}//${document.location.hostname}`
 	</script>
 
 	<head>
@@ -154,7 +155,7 @@
 			carousel = $("#carousel")
 			$.ajax({
 				type: "GET",
-				url: `http://localhost:8080/api/images?local-auth-id=${localAuthorityId}`,
+				url: `${hostName}:8080/api/images?local-auth-id=${localAuthorityId}`,
 				success: function (result) {
 					console.log(result)
 					carousel.slick({
