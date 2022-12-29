@@ -16,7 +16,13 @@ import java.util.List;
 public class LocalAuthority extends BaseModel {
 
     @Column(nullable = false)
-    private String name;
+    private String name_en;
+
+    @Column(nullable = false)
+    private String name_sl;
+
+    @Column(nullable = false)
+    private String name_ta;
 
     @Column(columnDefinition = "TEXT")
     private String favicon;
@@ -46,12 +52,28 @@ public class LocalAuthority extends BaseModel {
     public LocalAuthority() {
     }
 
-    public String getName() {
-        return name;
+    public String getName_en() {
+        return name_en;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName_en(String name_en) {
+        this.name_en = name_en;
+    }
+
+    public String getName_sl() {
+        return name_sl;
+    }
+
+    public void setName_sl(String name_sl) {
+        this.name_sl = name_sl;
+    }
+
+    public String getName_ta() {
+        return name_ta;
+    }
+
+    public void setName_ta(String name_ta) {
+        this.name_ta = name_ta;
     }
 
     public String getFavicon() {
