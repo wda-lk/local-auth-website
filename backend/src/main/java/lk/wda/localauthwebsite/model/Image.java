@@ -13,7 +13,7 @@ public class Image extends BaseModel {
     private String url;
 
     @Column(length = 40)
-    private String alt_text;
+    private String altText;
 
     @ManyToOne
     @JoinColumn(name = "local_authority_id")
@@ -27,12 +27,12 @@ public class Image extends BaseModel {
         this.url = url;
     }
 
-    public String getAlt_text() {
-        return alt_text;
+    public String getAltText() {
+        return altText;
     }
 
-    public void setAlt_text(String alt_text) {
-        this.alt_text = alt_text;
+    public void setAltText(String altText) {
+        this.altText = altText;
     }
 
     public LocalAuthority getLocalAuthority() {
