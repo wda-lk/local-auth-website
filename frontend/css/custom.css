@@ -227,5 +227,15 @@ button.bg-yellow:focus {
 a.text-yellow:hover, a.text-yellow:focus {
   color: $yellow_t2 !important;
 }
+
+.slick-track
+{
+    display: flex !important;
+}
+
+.slick-slide
+{
+    height: inherit !important;
+}
 	
 	

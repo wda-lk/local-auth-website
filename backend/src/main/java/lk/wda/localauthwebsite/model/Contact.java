@@ -9,10 +9,10 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "contact")
 public class Contact extends BaseModel {
-    @Column
+    @Column(columnDefinition = "TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci")
     private String position;
 
-    @Column
+    @Column(columnDefinition = "TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci")
     private String unit;
 
     @Column

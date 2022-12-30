@@ -18,10 +18,12 @@ public class LocalAuthority extends BaseModel {
     @Column(nullable = false)
     private String name_en;
 
-    @Column(nullable = false)
+    @Column(columnDefinition = "TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci",
+            nullable = false)
     private String name_sl;
 
-    @Column(nullable = false)
+    @Column(columnDefinition = "TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci",
+            nullable = false)
     private String name_ta;
 
     @Column(columnDefinition = "TEXT")
@@ -30,10 +32,10 @@ public class LocalAuthority extends BaseModel {
     @Column(columnDefinition = "TEXT")
     private String logo;
 
-    @Column
+    @Column(columnDefinition = "TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci")
     private String viewStatement;
 
-    @Column
+    @Column(columnDefinition = "TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci")
     private String missionStatement;
 
     @ManyToOne

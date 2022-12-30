@@ -9,10 +9,10 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "application")
 public class Application extends BaseModel {
-    @Column
+    @Column(columnDefinition = "TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci")
     private String name;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci")
     private String file;
 
     @ManyToOne

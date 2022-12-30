@@ -12,7 +12,8 @@ import java.util.List;
 @Table(name = "district")
 @JsonIgnoreProperties({"localAuthorities"})
 public class District extends BaseModel {
-    @Column(nullable = false)
+    @Column(columnDefinition = "TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci",
+            nullable = false)
     private String name;
 
     @OneToMany(mappedBy = "district")
