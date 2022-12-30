@@ -10,7 +10,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "district")
-@JsonIgnoreProperties({"localAuthorities"})
+@JsonIgnoreProperties({"createdAt", "updatedAt", "localAuthorities"})
 public class District extends BaseModel {
     @Column(nullable = false)
     private String name;
