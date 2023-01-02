@@ -1,0 +1,24 @@
+{
+  "name": "local-auth-website",
+  "version": "1.0.0",
+  "description": "Official Website for Local AAuthorities of Sri Lanka",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "http-server": "^0.12.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "http-server . --port 9001"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wda-lk/local-auth-website"
+  },
+  "author": "Wayamba Development Authority",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wda-lk/local-auth-website/issues"
+  },
+  "homepage": "https://web.cat2020.lk/"
+}
