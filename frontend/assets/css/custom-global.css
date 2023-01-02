@@ -1,0 +1,186 @@
+/* Basic */
+body {
+	padding-top:0;
+}
+
+.title-top {
+	color:#FFF;
+}
+
+.btn {
+	white-space:normal !important;
+	word-wrap:break-word;
+}
+
+h1, h2, h3, h4, h5, h6,
+h1 a:link, h2 a:link, h3 a:link, h4 a:link, h5 a:link, h6 a:link {
+	color:black;
+}
+
+
+/* Slick */
+.slick-track {
+	display:flex !important;
+}
+
+.slick-slide {
+	height:inherit !important;
+}
+
+
+/* Colours */
+:root {
+	--yellow_t1:#FFC000;
+	--yellow_t2:#CC9900;
+	--yellow_t3:#FFE79E;
+	--yellow_t4:#FFEDB7;
+	--yellow_t5:#846300;
+	--yellow_t6:#BC8E00;
+	--yellow_t7:#DBA500;
+	--yellow_t8:#513D00;
+	--yellow_t9:#FFF2CC;
+	--yellow_shadow:rgba(255, 192, 0, 0.5);
+	--yellow_text_color_dark_bright:#212529;
+}
+
+.alert-yellow {
+	color:var(--yellow_t5);
+	background-color:var(--yellow_t9);
+	border-color:var(--yellow_t4);
+}
+
+.alert-yellow hr {
+	border-top-color:var(--yellow_t3);
+}
+
+.alert-yellow .alert-link {
+	color:var(--yellow_t8);
+}
+
+.badge-yellow {
+	color:var(--yellow_text_color_dark_bright);
+	background-color:var(--yellow_t1);
+}
+
+.badge-yellow[href]:hover, .badge-yellow[href]:focus {
+	color:var(--yellow_text_color_dark_bright);
+	background-color:var(--yellow_t2);
+}
+
+.bg-yellow {
+	background-color:var(--yellow_t1) !important;
+}
+
+a.bg-yellow:hover, a.bg-yellow:focus,
+button.bg-yellow:hover,
+button.bg-yellow:focus {
+	background-color:var(--yellow_t2) !important;
+}
+
+.border-yellow {
+	border-color:var(--yellow_t1) !important;
+}
+
+.btn-yellow {
+	color:var(--yellow_text_color_dark_bright);
+	background-color:var(--yellow_t1);
+	border-color:var(--yellow_t1);
+}
+
+.btn-yellow:hover {
+	color:var(--yellow_text_color_dark_bright);
+	background-color:var(--yellow_t7);
+	border-color:var(--yellow_t2);
+}
+
+.btn-yellow:focus, .btn-yellow.focus {
+	box-shadow:0 0 0 0.2rem var(--yellow_shadow);
+}
+
+.btn-yellow.disabled, .btn-yellow:disabled {
+	color:var(--yellow_text_color_dark_bright);
+	background-color:var(--yellow_t1);
+	border-color:var(--yellow_t1);
+}
+
+.btn-yellow:not(:disabled):not(.disabled):active, .btn-yellow:not(:disabled):not(.disabled).active, .show > .btn-yellow.dropdown-toggle {
+	color:var(--yellow_text_color_dark_bright);
+	background-color:var(--yellow_t2);
+	border-color:var(--yellow_t6);
+}
+
+.btn-yellow:not(:disabled):not(.disabled):active:focus, .btn-yellow:not(:disabled):not(.disabled).active:focus, .show > .btn-yellow.dropdown-toggle:focus {
+	box-shadow:0 0 0 0.2rem var(--yellow_shadow);
+}
+
+.btn-outline-yellow {
+	color:var(--yellow_t1);
+	background-color:transparent;
+	border-color:var(--yellow_t1);
+}
+
+.btn-outline-yellow:hover {
+	color:var(--yellow_text_color_dark_bright);
+	background-color:var(--yellow_t1);
+	border-color:var(--yellow_t1);
+}
+
+.btn-outline-yellow:focus, .btn-outline-yellow.focus {
+	box-shadow:0 0 0 0.2rem var(--yellow_shadow);
+}
+
+.btn-outline-yellow.disabled, .btn-outline-yellow:disabled {
+	color:var(--yellow_t1);
+	background-color:transparent;
+}
+
+.btn-outline-yellow:not(:disabled):not(.disabled):active, .btn-outline-yellow:not(:disabled):not(.disabled).active, .show > .btn-outline-yellow.dropdown-toggle {
+	color:var(--yellow_text_color_dark_bright);
+	background-color:var(--yellow_t1);
+	border-color:var(--yellow_t1);
+}
+
+.btn-outline-yellow:not(:disabled):not(.disabled):active:focus, .btn-outline-yellow:not(:disabled):not(.disabled).active:focus, .show > .btn-outline-yellow.dropdown-toggle:focus {
+	box-shadow:0 0 0 0.2rem var(--yellow_shadow);
+}
+
+.list-group-item-yellow {
+	color:var(--yellow_t5);
+	background-color:var(--yellow_t4);
+}
+
+.list-group-item-yellow.list-group-item-action:hover, .list-group-item-yellow.list-group-item-action:focus {
+	color:var(--yellow_t5);
+	background-color:var(--yellow_t3);
+}
+
+.list-group-item-yellow.list-group-item-action.active {
+	color:var(--yellow_text_color_dark_bright);
+	background-color:var(--yellow_t5);
+	border-color:var(--yellow_t5);
+}
+
+.table-yellow,
+.table-yellow > th,
+.table-yellow > td {
+	background-color:var(--yellow_t4);
+}
+
+.table-hover .table-yellow:hover {
+	background-color:var(--yellow_t3);
+}
+
+.table-hover .table-yellow:hover > td,
+.table-hover .table-yellow:hover > th {
+	background-color:var(--yellow_t3);
+}
+
+.text-yellow {
+	color:var(--yellow_t1) !important;
+}
+
+a.text-yellow:hover, a.text-yellow:focus {
+	color:var(--yellow_t2) !important;
+}
+	
+	
