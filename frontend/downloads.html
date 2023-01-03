@@ -1,16 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<!-- Make sure a District and Local Authority is setup -->
-		<script>
-			let districtId = localStorage.getItem("districtId")
-			let localAuthorityId = localStorage.getItem("localAuthorityId")
-			let localAuthorityObj = JSON.parse(localStorage.getItem("localAuthorityObj"))
-			if (districtId == null || localAuthorityId == null) {
-				window.location.href = "./index.html"
-			}
-			let hostName = `${document.location.protocol}//${document.location.hostname}`
-		</script>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<meta name="description" content="Access web pages of Sri Lankan Local Authorities">
@@ -20,16 +10,12 @@
 		<!-- Custom Global CSS -->
 		<link rel="stylesheet" type="text/css" href="assets/css/custom-global.css">
 	</head>
-	<script id="meta-data-tmpl" type="x-tmpl-mustache">
-			<title>{{name}}</title>
-			<link rel="icon" type="image/png" href=https://drive.google.com/uc?id={{favicon}}>
-	</script>
 
 	<body>
 		<!-- Navigation -->
 		<div id="navbar" class="container-fluid" style="background-color:#900; margin-bottom:20px;">
 		</div>
-
+		<!-- Content -->
 		<div class="container-fluid">
 			<div class="row">
 				<!-- Left Column -->
@@ -50,7 +36,6 @@
 						</div>
 					</div>
 				</div>
-
 				<!-- Center Column -->
 				<div class="col-sm-6">
 					<div class="table-responsive">
@@ -61,23 +46,11 @@
 								<th scope="col">සබැදිය</th>
 							</tr>
 							</thead>
-							<!-- server -->
 							<tbody id="application-table">
-							<script id="application-row-tmpl" type="x-tmpl-mustache">
-								{{#content}}
-									<tr>
-									<td>{{name}}</td>
-									<td>
-										<a href={{file}} class="btn btn-info" role="button" aria-pressed="true" target="_blank">Download</a>
-									</td>
-									</tr>
-								{{/content}}
-							</script>
 							</tbody>
 						</table>
 					</div>
 				</div>
-
 				<!-- Right Column -->
 				<div class="col-sm-3">
 					<!-- List-Group Panel -->
@@ -98,7 +71,6 @@
 				</div>
 			</div>
 		</div>
-
 		<!-- Footer -->
 		<div id="footer" class="footer"></div>
 
@@ -110,19 +82,32 @@
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 		<!-- Mustache JS -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.1.0/mustache.min.js" integrity="sha512-WJoegbZkRk/oQbcp2Nm2JfgrHHyHdhaHns2g74rXFRxxy+E+syUWQCiZxSzGo0662p/GQEVXDkg6ImtSR60DHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-		<!-- Script for static HTML -->
+		<!-- Custom -->
+		<script src="assets/js/global.js"></script>
 		<script src="assets/js/component-loader.js"></script>
 		<script src="assets/js/template-renderer.js"></script>
 	</body>
 
+	<script id="meta-data-tmpl" type="x-tmpl-mustache">
+			<title>{{name_en}}</title>
+			<link rel="icon" type="image/png" href=https://drive.google.com/uc?id={{favicon}}>
+	</script>
+	<script id="application-row-tmpl" type="x-tmpl-mustache">
+		{{#content}}
+			<tr>
+			<td>{{name}}</td>
+			<td>
+				<a href={{file}} class="btn btn-info" role="button" aria-pressed="true" target="_blank">Download</a>
+			</td>
+			</tr>
+		{{/content}}
+	</script>
+
 	<script>
+		renderMetaData()
 		$(function () {
 			loadNav("assets/common")
 			loadFooter("assets/common")
-
-			let template = $("#meta-data-tmpl").html()
-			let rendered = Mustache.render(template, localAuthorityObj)
-			$("head").append(rendered)
 
 			$.ajax({
 				type: "GET",

@@ -1,5 +1,4 @@
 function renderNavTemplate() {
-	let localAuthority = JSON.parse(localStorage.getItem("localAuthorityObj"))
 	// load navigation name
 	let template = $("#template-la-name").html()
 	let rendered = Mustache.render(template, localAuthority)
@@ -8,4 +7,10 @@ function renderNavTemplate() {
 	template = $("#template-logo").html()
 	rendered = Mustache.render(template, localAuthority)
 	$("#logo-nav").append(rendered)
+}
+
+function renderMetaData() {
+	let template = $("#meta-data-tmpl").html()
+	let rendered = Mustache.render(template, localAuthority)
+	$("head").append(rendered)
 }
