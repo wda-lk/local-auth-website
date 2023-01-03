@@ -10,6 +10,9 @@ import javax.persistence.Table;
 @Table(name = "contact")
 public class Contact extends BaseModel {
     @Column(columnDefinition = "TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci")
+    private String name;
+
+    @Column(columnDefinition = "TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci")
     private String position;
 
     @Column(columnDefinition = "TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci")
@@ -23,6 +26,14 @@ public class Contact extends BaseModel {
     private LocalAuthority localAuthority;
 
     public Contact() {
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getPosition() {
