@@ -20,7 +20,7 @@ public class LocalAuthority extends BaseModel {
 
     @Column(columnDefinition = "TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci",
             nullable = false)
-    private String name_sl;
+    private String name_si;
 
     @Column(columnDefinition = "TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci",
             nullable = false)
@@ -62,12 +62,12 @@ public class LocalAuthority extends BaseModel {
         this.name_en = name_en;
     }
 
-    public String getName_sl() {
-        return name_sl;
+    public String getName_si() {
+        return name_si;
     }
 
-    public void setName_sl(String name_sl) {
-        this.name_sl = name_sl;
+    public void setName_si(String name_si) {
+        this.name_si = name_si;
     }
 
     public String getName_ta() {

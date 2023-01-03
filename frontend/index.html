@@ -100,8 +100,13 @@
 					url: `${hostName}:8080/api/local-auths?district-id=${districtId}`,
 					success: function (result) {
 						let template = "{{#.}}" +
-						               "<option value={{id}} data-name_sl={{name_sl}} data-name_ta={{name_ta}} data-name_en={{name_en}} data-favicon={{favicon}} data-logo={{favicon}}>" +
-						               "{{name_sl}}" +
+						               "<option value={{id}} " +
+						                    "data-name-si={{name_si}} " +
+						                    "data-name-ta={{name_ta}} " +
+						                    "data-name-en={{name_en}} " +
+						                    "data-favicon={{favicon}} " +
+						                    "data-logo={{favicon}}>" +
+						                    "{{name_si}}" +
 						               "</option>" +
 						               "{{/.}}"
 						localAuthorityPicker.append(Mustache.render(template, result))
@@ -119,12 +124,13 @@
 				localAuthorityId = this.value
 				let selectedOption = $(this).find(":selected")
 				localAuthorityObj = {
-					"name_sl": selectedOption.data("name_sl"),
-					"name_en": selectedOption.data("name_en"),
-					"name_ta": selectedOption.data("name_ta"),
+					"name-si": selectedOption.data("name-si"),
+					"name-en": selectedOption.data("name-en"),
+					"name-ta": selectedOption.data("name-ta"),
 					"favicon": selectedOption.data("favicon"),
 					"logo": selectedOption.data("logo")
 				}
+				console.log(localAuthorityObj)
 				homeButton.prop("disabled", false)
 			})
 
