@@ -73,12 +73,13 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.1.0/mustache.min.js" integrity="sha512-WJoegbZkRk/oQbcp2Nm2JfgrHHyHdhaHns2g74rXFRxxy+E+syUWQCiZxSzGo0662p/GQEVXDkg6ImtSR60DHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 		<!-- Bootstrap-Select JS -->
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
-		<!-- Script for static HTML -->
+		<!-- Custom -->
+		<script src="assets/js/global.js"></script>
 		<script src="assets/js/component-loader.js"></script>
+		<script src="assets/js/template-renderer.js"></script>
 	</body>
 	<script>
 		$(function () {
-			loadNav("assets/common")
 			loadFooter("assets/common")
 
 			let hostName = `${document.location.protocol}//${document.location.hostname}`
