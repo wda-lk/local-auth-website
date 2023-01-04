@@ -78,6 +78,7 @@
 		<script src="assets/js/component-loader.js"></script>
 		<script src="assets/js/template-renderer.js"></script>
 	</body>
+
 	<script>
 		$(function () {
 			loadFooter("assets/common")
@@ -99,16 +100,18 @@
 					type: "GET",
 					url: `${hostName}:8080/api/local-auths?district-id=${districtId}`,
 					success: function (result) {
-						let template = "{{#.}}" +
-						               "<option value={{id}} " +
-						                    "data-name-si={{name_si}} " +
-						                    "data-name-ta={{name_ta}} " +
-						                    "data-name-en={{name_en}} " +
-						                    "data-favicon={{favicon}} " +
-						                    "data-logo={{favicon}}>" +
-						                    "{{name_si}}" +
-						               "</option>" +
-						               "{{/.}}"
+						result = {"results": result}
+						console.log(result)
+						let template = "{{#results}}" +
+							               "<option value={{id}} " +
+							                    "data-name-si='{{name_si}}' " +
+							                    "data-name-ta='{{name_ta}}' " +
+							                    "data-name-en='{{name_en}}' " +
+							                    "data-favicon='{{favicon}}' " +
+							                    "data-logo='{{favicon}}' >" +
+							                    "{{name_si}}" +
+							               "</option>" +
+						               "{{/results}}"
 						localAuthorityPicker.append(Mustache.render(template, result))
 						localAuthorityPicker.prop("disabled", false)
 						localAuthorityPicker.selectpicker("render")
