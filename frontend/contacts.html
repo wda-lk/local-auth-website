@@ -77,10 +77,9 @@
 			loadServices("assets/common")
 			loadFooter("assets/common")
 
-			let hostName = `${document.location.protocol}//${document.location.hostname}`
 			$.ajax({
 				type: "GET",
-				url: `${hostName}:8080/api/contacts?local-auth-id=${localAuthorityId}`,
+				url: `${hostName}:${port}/${baseAPI}/contacts?local-auth-id=${localAuthorityId}`,
 				success: function (result) {
 					template = $("#contacts-row-tmpl").html()
 					rendered = Mustache.render(template, result)

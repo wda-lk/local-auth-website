@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/provinces")
+@RequestMapping("api/provinces")
 public class ProvinceController {
     private final ProvinceRepository provinceRepository;
 

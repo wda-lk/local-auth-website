@@ -62,7 +62,7 @@
 			carousel = $("#carousel")
 			$.ajax({
 				type: "GET",
-				url: `${hostName}:8080/api/images?local-auth-id=${localAuthorityId}`,
+				url: `${hostName}:${port}/${baseAPI}/images?local-auth-id=${localAuthorityId}`,
 				success: function (result) {
 					console.log(result)
 					carousel.slick({

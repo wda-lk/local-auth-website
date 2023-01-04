@@ -79,7 +79,7 @@
 
 			$.ajax({
 				type: "GET",
-				url: `${hostName}:8080/api/applications?local-auth-id=${localAuthorityId}`,
+				url: `${hostName}:${port}/${baseAPI}/applications?local-auth-id=${localAuthorityId}`,
 				success: function (result) {
 					template = $("#application-row-tmpl").html()
 					rendered = Mustache.render(template, result)

@@ -64,9 +64,8 @@
 			loadServices("assets/common")
 			loadFooter("assets/common")
 
-			let hostName = `${document.location.protocol}//${document.location.hostname}`
 			$.ajax({
-				type: "GET", url: `${hostName}:8080/api/local-auths/${localAuthorityId}`,
+				type: "GET", url: `${hostName}:${port}/${baseAPI}/local-auths/${localAuthorityId}`,
 				success: function (result) {
 					console.log(result)
 					template = $("#statements-tmpl").html()

@@ -94,7 +94,6 @@
 		$(function () {
 			loadFooter("assets/common")
 
-			let hostName = `${document.location.protocol}//${document.location.hostname}`
 			let provincePicker = $("#province-picker")
 			let districtPicker = $("#district-picker")
 			let localAuthorityPicker = $("#localauthority-picker")
@@ -112,7 +111,7 @@
 
 				$.ajax({
 					type: "GET",
-					url: `${hostName}:8080/api/districts?province-id=${provinceId}`,
+					url: `${hostName}:${port}/${baseAPI}/districts?province-id=${provinceId}`,
 					success: function (result) {
 						result = {"results": result}
 						let template = "{{#results}}" +
@@ -137,7 +136,7 @@
 				districtId = this.value
 				$.ajax({
 					type: "GET",
-					url: `${hostName}:8080/api/local-auths?district-id=${districtId}`,
+					url: `${hostName}:${port}/${baseAPI}/local-auths?district-id=${districtId}`,
 					success: function (result) {
 						result = {"results": result}
 						console.log(result)
@@ -186,7 +185,7 @@
 
 			// Get all Provinces
 			$.ajax({
-				type: "GET", url: `${hostName}:8080/api/provinces`,
+				type: "GET", url: `${hostName}:${port}/${baseAPI}/provinces`,
 				success: function (result) {
 					let template = "{{#.}}<option value={{id}}>{{name}}</option>{{/.}}"
 					provincePicker.append(Mustache.render(template, result))
