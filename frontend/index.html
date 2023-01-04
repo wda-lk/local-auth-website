@@ -32,6 +32,17 @@
 			<br><br><br>
 			<div class="form-group row justify-content-md-center">
 				<div class="col-md-6">
+					<label for="province-picker">Province</label>
+					<select id="province-picker" class="selectpicker form-control"
+					        title="Choose one of the Provinces..."
+					        data-live-search="true"
+					        disabled>
+					</select>
+				</div>
+			</div>
+			<br>
+			<div class="form-group row justify-content-md-center">
+				<div class="col-md-6">
 					<label for="district-picker">District</label>
 					<select id="district-picker" class="selectpicker form-control"
 					        title="Choose one of the Districts..."
@@ -84,18 +95,46 @@
 			loadFooter("assets/common")
 
 			let hostName = `${document.location.protocol}//${document.location.hostname}`
+			let provincePicker = $("#province-picker")
 			let districtPicker = $("#district-picker")
 			let localAuthorityPicker = $("#localauthority-picker")
 			let homeButton = $("#home-button")
 			let districtId
+			let provinceId
 			let localAuthorityId
 			let localAuthorityObj
+
+			provincePicker.on("change", function () {
+				districtPicker.empty()
+				localAuthorityPicker.empty()
+				homeButton.prop("disabled", true)
+				provinceId = this.value
+
+				$.ajax({
+					type: "GET",
+					url: `${hostName}:8080/api/districts?province-id=${provinceId}`,
+					success: function (result) {
+						result = {"results": result}
+						let template = "{{#results}}" +
+							               "<option value={{id}} >" +
+							                    "{{name}}" +
+							               "</option>" +
+						               "{{/results}}"
+						districtPicker.append(Mustache.render(template, result))
+						districtPicker.prop("disabled", false)
+						districtPicker.selectpicker("render")
+						districtPicker.selectpicker("refresh")
+					},
+					error: function (xhr) {
+						console.log(`An error occurred: ${xhr.status} ${xhr.statusText}`)
+					}
+				})
+			})
+
 			districtPicker.on("change", function () {
-				// Remove selected option
 				localAuthorityPicker.empty()
 				homeButton.prop("disabled", true)
 				districtId = this.value
-				// Get Local Authority for selected District
 				$.ajax({
 					type: "GET",
 					url: `${hostName}:8080/api/local-auths?district-id=${districtId}`,
@@ -133,27 +172,27 @@
 					"favicon": selectedOption.data("favicon"),
 					"logo": selectedOption.data("logo")
 				}
-				console.log(localAuthorityObj)
 				homeButton.prop("disabled", false)
 			})
 
 			// Save selected data
 			homeButton.on("click", function () {
+				localStorage.setItem("provinceId", provinceId)
 				localStorage.setItem("districtId", districtId)
 				localStorage.setItem("localAuthorityId", localAuthorityId)
 				localStorage.setItem("localAuthorityObj", JSON.stringify(localAuthorityObj))
 				window.location.href = "home.html"
 			})
 
-			// Get all Districts
+			// Get all Provinces
 			$.ajax({
-				type: "GET", url: `${hostName}:8080/api/districts`,
+				type: "GET", url: `${hostName}:8080/api/provinces`,
 				success: function (result) {
 					let template = "{{#.}}<option value={{id}}>{{name}}</option>{{/.}}"
-					districtPicker.append(Mustache.render(template, result))
-					districtPicker.prop("disabled", false)
-					districtPicker.selectpicker("render")
-					districtPicker.selectpicker("refresh")
+					provincePicker.append(Mustache.render(template, result))
+					provincePicker.prop("disabled", false)
+					provincePicker.selectpicker("render")
+					provincePicker.selectpicker("refresh")
 				},
 				error: function (xhr) {
 					console.log(`An error occurred: ${xhr.status} ${xhr.statusText}`)
