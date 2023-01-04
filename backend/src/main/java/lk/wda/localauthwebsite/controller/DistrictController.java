@@ -5,6 +5,7 @@ import lk.wda.localauthwebsite.repository.DistrictRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,7 +22,8 @@ public class DistrictController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<District> getAllDistricts() {
-        return districtRepository.findAll();
+    public List<District> getAllDistrictsByProvinceId(
+            @RequestParam(name = "province-id") long id) {
+        return districtRepository.findAllByProvinceId(id);
     }
 }
