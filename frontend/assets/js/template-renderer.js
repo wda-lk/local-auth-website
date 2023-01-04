@@ -1,4 +1,4 @@
-function renderNavTemplate() {
+function renderHeaderTemplate() {
 	// load navigation name
 	let template = $("#template-la-name").html()
 	let rendered = Mustache.render(template, localAuthority)

@@ -18,25 +18,7 @@
 		<!-- Content -->
 		<div class="container-fluid">
 			<div class="row">
-				<!-- Left Column -->
-				<div class="col-sm-3" style="margin-bottom:20px;">
-					<!-- List-Group Panel -->
-					<div class="card">
-						<div class="card-header">
-							<h5 class="card-title"><span class="glyphicon glyphicon-tasks"></span>Navigation
-							</h5>
-						</div>
-						<div class="list-group">
-							<a href="./home.html" class="list-group-item list-group-item-action">Home Page</a>
-							<a href="./about.html" class="list-group-item list-group-item-action">About Us</a>
-							<a href="./services.html" class="list-group-item list-group-item-action">E-Citizen Services</a>
-							<a href="https://kuliyapitiyauc.cat2020.org/" class="list-group-item list-group-item-action">Registration</a>
-							<a href="./downloads.html" class="list-group-item list-group-item-action">Download</a>
-							<a href="./contacts.html" class="list-group-item list-group-item-action">Contact Us</a>
-						</div>
-					</div>
-				</div>
-				<!-- Center Column -->
+				<div id="nav-container" class="col-sm-3" style="margin-bottom:20px;"></div>
 				<div class="col-sm-6">
 					<div class="table-responsive">
 						<table class="table table-hover table-bordered ">
@@ -51,24 +33,7 @@
 						</table>
 					</div>
 				</div>
-				<!-- Right Column -->
-				<div class="col-sm-3">
-					<!-- List-Group Panel -->
-					<div class="card">
-						<div class="card-header">
-							<h5 class="card-title">
-								<span class="glyphicon glyphicon-wrench"></span>Our Services</h5>
-						</div>
-						<div class="list-group">
-							<a href="#" class="list-group-item list-group-item-action">Complain</a>
-							<a href="#" class="list-group-item list-group-item-action">Issuing Certificates</a>
-							<a href="#" class="list-group-item list-group-item-action">Rates Payments</a>
-							<a href="#" class="list-group-item list-group-item-action">Application for Water Bowser</a>
-							<a href="#" class="list-group-item list-group-item-action">Application for Gully Bowser</a>
-							<a href="#" class="list-group-item list-group-item-action">Street Light Complain</a>
-						</div>
-					</div>
-				</div>
+				<div id="service-container" class="col-sm-3"></div>
 			</div>
 		</div>
 		<!-- Footer -->
@@ -107,7 +72,9 @@
 	<script>
 		renderMetaData()
 		$(function () {
+			loadHeader("assets/common")
 			loadNav("assets/common")
+			loadServices("assets/common")
 			loadFooter("assets/common")
 
 			$.ajax({
