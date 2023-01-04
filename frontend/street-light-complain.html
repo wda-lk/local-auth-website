@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="Access web pages of Sri Lankan Local Authorities">
+		<meta name="author" content="Wayamba Development Authority">
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+		<!-- Slick CSS -->
+		<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+		<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+		<!-- Custom Global CSS -->
+		<link rel="stylesheet" type="text/css" href="assets/css/custom-global.css">
+	</head>
+
+	<body>
+		<!-- Navigation -->
+		<div id="navbar" class="container-fluid" style="background-color:#900; margin-bottom:20px;">
+		</div>
+		<!-- Content -->
+		<div class="container-fluid">
+			<div class="row">
+				<div id="nav-container" class="col-sm-3" style="margin-bottom:20px;"></div>
+				<div class="col-sm-6">
+					<h1>වීදිපහන් පැමිණිලි</h1>
+					<p>කුලියාපිටිය නාගරික බල ප්‍රදේශයේ පුරවැසියකු වන ඔබට වීදිපහන් සේවාවන් පිළිබඳ පැමිණිළි ඉදිරිපත්කිරීමේ හැකියාව පවතී. ඔබගේ පැමිණිළි ඔබට සේවා සපයන රාජ්‍ය ආයතනයක් වන අපට ඉතා වැදගත්වේ.</p>
+					<h4>පැමිණිල්ලක් කරනුලබන පිළිවෙල</h4>
+					<ul style="list-style-type: disc;">
+						<li>ඔබ සඳහා මාර්ගගත ගිණුමක් තිබිය යුතුයි.</li>
+						<li>වෙබ් පිටුවෙහි ඉහතින් දක්වාඇති "online payment" click කර මුරපද භාවිතාකොට ගිණුමට ඇතුල් වන්න.</li>
+						<li>ඔබගේ ගිණමට ඇතුල් වීමෙන් පසු වම් පස ඇති ප්‍රධාන මෙනු තීරුවෙහි "Street light Complain" යන්න තෝරන්න.</li>
+						<li>පෙන්වනු ලබන අතුරු මුහුණතෙන් මාර්ගයේ නම, කණු අංකය, පැමිණිල්ල පිළිබඳ කාරනාව, සම්බන්ද කරගතහැකි දුරකථන අංකයක් ඇතුලත් කර "submit button" එක click කරන්න.</li>
+					</ul>
+					<a href="#">
+						<button type="button" class="btn btn-warning">පැමිණිලි කිරීමට</button>
+					</a>
+				</div>
+				<div id="service-container" class="col-sm-3"></div>
+			</div>
+		</div>
+		<!-- Footer -->
+		<div id="footer" class="footer"></div>
+
+		<!-- JQuery JS -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<!-- Popper JS -->
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+		<!-- Bootstrap JS -->
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+		<!-- Mustache JS -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.1.0/mustache.min.js" integrity="sha512-WJoegbZkRk/oQbcp2Nm2JfgrHHyHdhaHns2g74rXFRxxy+E+syUWQCiZxSzGo0662p/GQEVXDkg6ImtSR60DHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<!-- Custom -->
+		<script src="assets/js/global.js"></script>
+		<script src="assets/js/validator.js"></script>
+		<script src="assets/js/component-loader.js"></script>
+		<script src="assets/js/template-renderer.js"></script>
+	</body>
+
+	<script id="meta-data-tmpl" type="x-tmpl-mustache">
+			<title>{{name-en}}</title>
+			<link rel="icon" type="image/png" href=https://drive.google.com/uc?id={{favicon}}>
+	</script>
+
+	<script>
+		renderMetaData()
+		$(function () {
+			loadHeader("assets/common")
+			loadNav("assets/common")
+			loadServices("assets/common")
+			loadFooter("assets/common")
+		})
+	</script>
+</html>
