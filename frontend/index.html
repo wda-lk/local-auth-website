@@ -17,12 +17,12 @@
 	</head>
 	<body>
 		<!-- Navigation -->
-		<div class="container-fluid" style="background-color:#900; margin-bottom:20px;">
+		<div class="container-fluid" style="background-color:#900; margin-bottom:50px;">
 			<div class="row" style="align-items: center; justify-content: space-between; height:100px;">
-				<div class="col-md-5 text-md-center">
-					<h4 class="title-top">DEPARTMENT OF LOCAL GOVERNMENT</h4>
+				<div class="col-8 col-md-4 text-md-center">
+					<h4 class="title-top">Department of Local Government</h4>
 				</div>
-				<div class="col-sm-2" style="margin-top:10px; margin-bottom:10px;">
+				<div class="col-4 col-md-2" style="margin-top:10px; margin-bottom:10px;">
 					<img src="assets/img/main-logo.png" alt="" style="height:80px; width:70px">
 				</div>
 			</div>
@@ -72,7 +72,7 @@
 		</div>
 
 		<!-- Footer -->
-		<div id="footer" class="footer"></div>
+		<div id="footer"></div>
 
 		<!-- JQuery JS -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -94,7 +94,6 @@
 		$(function () {
 			loadFooter("assets/common")
 
-			let hostName = `${document.location.protocol}//${document.location.hostname}`
 			let provincePicker = $("#province-picker")
 			let districtPicker = $("#district-picker")
 			let localAuthorityPicker = $("#localauthority-picker")
@@ -112,7 +111,7 @@
 
 				$.ajax({
 					type: "GET",
-					url: `${hostName}:8080/api/districts?province-id=${provinceId}`,
+					url: `${hostName}:${port}/${baseAPI}/districts?province-id=${provinceId}`,
 					success: function (result) {
 						result = {"results": result}
 						let template = "{{#results}}" +
@@ -137,7 +136,7 @@
 				districtId = this.value
 				$.ajax({
 					type: "GET",
-					url: `${hostName}:8080/api/local-auths?district-id=${districtId}`,
+					url: `${hostName}:${port}/${baseAPI}/local-auths?district-id=${districtId}`,
 					success: function (result) {
 						result = {"results": result}
 						console.log(result)
@@ -186,7 +185,7 @@
 
 			// Get all Provinces
 			$.ajax({
-				type: "GET", url: `${hostName}:8080/api/provinces`,
+				type: "GET", url: `${hostName}:${port}/${baseAPI}/provinces`,
 				success: function (result) {
 					let template = "{{#.}}<option value={{id}}>{{name}}</option>{{/.}}"
 					provincePicker.append(Mustache.render(template, result))

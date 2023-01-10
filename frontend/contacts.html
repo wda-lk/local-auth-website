@@ -13,7 +13,7 @@
 
 	<body>
 		<!-- Navigation -->
-		<div id="navbar" class="container-fluid" style="background-color:#900; margin-bottom:20px;">
+		<div id="navbar" class="container-fluid" style="background-color:#900; margin-bottom:50px;">
 		</div>
 		<!-- Content -->
 		<div class="container-fluid">
@@ -37,7 +37,7 @@
 			</div>
 		</div>
 		<!-- Footer -->
-		<div id="footer" class="footer"></div>
+		<div id="footer"></div>
 
 		<!-- JQuery JS -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -77,10 +77,9 @@
 			loadServices("assets/common")
 			loadFooter("assets/common")
 
-			let hostName = `${document.location.protocol}//${document.location.hostname}`
 			$.ajax({
 				type: "GET",
-				url: `${hostName}:8080/api/contacts?local-auth-id=${localAuthorityId}`,
+				url: `${hostName}:${port}/${baseAPI}/contacts?local-auth-id=${localAuthorityId}`,
 				success: function (result) {
 					template = $("#contacts-row-tmpl").html()
 					rendered = Mustache.render(template, result)
