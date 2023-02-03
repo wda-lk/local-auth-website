@@ -30,8 +30,7 @@ public class GoogleSheetsUtil {
     private static final List<String> SCOPES = Collections.singletonList(SheetsScopes.SPREADSHEETS);
     private static final String CREDENTIALS_FILE_PATH = "/google-sheets-credentials.json";
 
-    private static Credential getCredentials(final NetHttpTransport HTTP_TRANSPORT)
-            throws IOException {
+    private static Credential getCredentials(final NetHttpTransport HTTP_TRANSPORT) throws IOException {
         InputStream in = GoogleSheetsUtil.class.getResourceAsStream(CREDENTIALS_FILE_PATH);
         if (in == null) {
             throw new FileNotFoundException("Resource not found: " + CREDENTIALS_FILE_PATH);
@@ -42,8 +41,7 @@ public class GoogleSheetsUtil {
                          JSON_FACTORY,
                          GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in)),
                          SCOPES)
-                .setDataStoreFactory(new FileDataStoreFactory(new java.io.File(
-                        TOKENS_DIRECTORY_PATH)))
+                .setDataStoreFactory(new FileDataStoreFactory(new java.io.File(TOKENS_DIRECTORY_PATH)))
                 .setAccessType("offline")
                 .build();
         VerificationCodeReceiver receiver = new LocalServerReceiver
