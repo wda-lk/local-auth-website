@@ -1,0 +1,7 @@
+## Database Properties
+spring.datasource.username = ${DB_USERNAME}
+spring.datasource.password = ${DB_PASSWORD}
+
+## JPA Properties
+logging.level.org.hibernate.SQL=DEBUG
+logging.level.org.hibernate.type.descriptor.sql.BasicBinder=TRACE
