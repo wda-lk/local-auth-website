@@ -1,4 +1,4 @@
-package lk.wda.localauthwebsite.common;
+package lk.wda.localauthwebsite.utility;
 
 import com.google.api.client.auth.oauth2.AuthorizationCodeFlow;
 import com.google.api.client.auth.oauth2.Credential;
@@ -26,7 +26,7 @@ import java.util.List;
 public class GoogleSheetsUtil {
     private static final String APPLICATION_NAME = "Local Authority Website";
     private static final JsonFactory JSON_FACTORY = GsonFactory.getDefaultInstance();
-    private static final String TOKENS_DIRECTORY_PATH = "tokens";
+    private static final String TOKENS_DIRECTORY_PATH = "backend/src/main/resources/tokens";
     private static final List<String> SCOPES = Collections.singletonList(SheetsScopes.SPREADSHEETS);
     private static final String CREDENTIALS_FILE_PATH = "/google-sheets-credentials.json";
 
@@ -35,7 +35,6 @@ public class GoogleSheetsUtil {
         if (in == null) {
             throw new FileNotFoundException("Resource not found: " + CREDENTIALS_FILE_PATH);
         }
-
         AuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow
                 .Builder(HTTP_TRANSPORT,
                          JSON_FACTORY,

@@ -8,7 +8,5 @@ import java.util.List;
 
 @Repository
 public interface LocalAuthorityRepository extends JpaRepository<LocalAuthority, Long> {
-
     List<LocalAuthority> findAllByDistrictId(Long districtId);
-
 }

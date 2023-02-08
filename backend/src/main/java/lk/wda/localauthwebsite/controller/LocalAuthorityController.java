@@ -2,9 +2,11 @@ package lk.wda.localauthwebsite.controller;
 
 import lk.wda.localauthwebsite.model.LocalAuthority;
 import lk.wda.localauthwebsite.repository.LocalAuthorityRepository;
+import lk.wda.localauthwebsite.service.LocalAuthorityService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -17,9 +19,18 @@ import java.util.Optional;
 @RequestMapping("api/local-auths")
 public class LocalAuthorityController {
     private final LocalAuthorityRepository localAuthorityRepository;
+    private final LocalAuthorityService localAuthorityService;
 
-    public LocalAuthorityController(LocalAuthorityRepository localAuthorityRepository) {
+    public LocalAuthorityController(LocalAuthorityRepository localAuthorityRepository,
+                                    LocalAuthorityService localAuthorityService) {
         this.localAuthorityRepository = localAuthorityRepository;
+        this.localAuthorityService = localAuthorityService;
+    }
+
+    @PostMapping("/init")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Object[] initiateData() {
+        return localAuthorityService.initDBData();
     }
 
     @GetMapping("/{id}")
@@ -30,8 +41,7 @@ public class LocalAuthorityController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<LocalAuthority> getAllLocalAuthoritiesByDistrictId(
-            @RequestParam(name = "district-id") long id) {
+    public List<LocalAuthority> getAllLocalAuthoritiesByDistrictId(@RequestParam(name = "district-id") long id) {
         return localAuthorityRepository.findAllByDistrictId(id);
     }
 }
