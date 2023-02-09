@@ -9,16 +9,34 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "contact")
 public class Contact extends BaseModel {
-    @Column(columnDefinition = "TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci")
-    private String name;
+    @Column(nullable = false)
+    private String nameEN;
 
-    @Column(columnDefinition = "TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci")
-    private String position;
+    @Column(nullable = false)
+    private String nameSI;
 
-    @Column(columnDefinition = "TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci")
-    private String unit;
+    @Column(nullable = false)
+    private String nameTA;
 
     @Column
+    private String positionEN;
+
+    @Column
+    private String positionSI;
+
+    @Column
+    private String positionTA;
+
+    @Column
+    private String unitEN;
+
+    @Column
+    private String unitSI;
+
+    @Column
+    private String unitTA;
+
+    @Column(nullable = false)
     private String telNumber;
 
     @ManyToOne
@@ -28,28 +46,76 @@ public class Contact extends BaseModel {
     public Contact() {
     }
 
-    public String getName() {
-        return name;
+    public String getNameEN() {
+        return nameEN;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNameEN(String nameEN) {
+        this.nameEN = nameEN;
     }
 
-    public String getPosition() {
-        return position;
+    public String getNameSI() {
+        return nameSI;
     }
 
-    public void setPosition(String position) {
-        this.position = position;
+    public void setNameSI(String nameSI) {
+        this.nameSI = nameSI;
     }
 
-    public String getUnit() {
-        return unit;
+    public String getNameTA() {
+        return nameTA;
     }
 
-    public void setUnit(String unit) {
-        this.unit = unit;
+    public void setNameTA(String nameTA) {
+        this.nameTA = nameTA;
+    }
+
+    public String getPositionEN() {
+        return positionEN;
+    }
+
+    public void setPositionEN(String positionEN) {
+        this.positionEN = positionEN;
+    }
+
+    public String getPositionSI() {
+        return positionSI;
+    }
+
+    public void setPositionSI(String positionSI) {
+        this.positionSI = positionSI;
+    }
+
+    public String getPositionTA() {
+        return positionTA;
+    }
+
+    public void setPositionTA(String positionTA) {
+        this.positionTA = positionTA;
+    }
+
+    public String getUnitEN() {
+        return unitEN;
+    }
+
+    public void setUnitEN(String unitEN) {
+        this.unitEN = unitEN;
+    }
+
+    public String getUnitSI() {
+        return unitSI;
+    }
+
+    public void setUnitSI(String unitSI) {
+        this.unitSI = unitSI;
+    }
+
+    public String getUnitTA() {
+        return unitTA;
+    }
+
+    public void setUnitTA(String unitTA) {
+        this.unitTA = unitTA;
     }
 
     public String getTelNumber() {

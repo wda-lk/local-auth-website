@@ -14,29 +14,38 @@ import java.util.List;
 @Table(name = "local_authority")
 @JsonIgnoreProperties({"images", "applications", "contacts"})
 public class LocalAuthority extends BaseModel {
+    @Column(nullable = false)
+    private String nameEN;
 
     @Column(nullable = false)
-    private String name_en;
+    private String nameSI;
 
-    @Column(columnDefinition = "TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci",
-            nullable = false)
-    private String name_si;
-
-    @Column(columnDefinition = "TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci",
-            nullable = false)
-    private String name_ta;
+    @Column(nullable = false)
+    private String nameTA;
 
     @Column(columnDefinition = "TEXT")
     private String favicon;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "TEXT", nullable = false)
     private String logo;
 
-    @Column(columnDefinition = "TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci")
-    private String viewStatement;
+    @Column
+    private String viewStatementEN;
 
-    @Column(columnDefinition = "TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci")
-    private String missionStatement;
+    @Column
+    private String viewStatementSI;
+
+    @Column
+    private String viewStatementTA;
+
+    @Column
+    private String missionStatementEN;
+
+    @Column
+    private String missionStatementSI;
+
+    @Column
+    private String missionStatementTA;
 
     @ManyToOne
     @JoinColumn(name = "district_id")
@@ -54,28 +63,28 @@ public class LocalAuthority extends BaseModel {
     public LocalAuthority() {
     }
 
-    public String getName_en() {
-        return name_en;
+    public String getNameEN() {
+        return nameEN;
     }
 
-    public void setName_en(String name_en) {
-        this.name_en = name_en;
+    public void setNameEN(String nameEN) {
+        this.nameEN = nameEN;
     }
 
-    public String getName_si() {
-        return name_si;
+    public String getNameSI() {
+        return nameSI;
     }
 
-    public void setName_si(String name_si) {
-        this.name_si = name_si;
+    public void setNameSI(String nameSI) {
+        this.nameSI = nameSI;
     }
 
-    public String getName_ta() {
-        return name_ta;
+    public String getNameTA() {
+        return nameTA;
     }
 
-    public void setName_ta(String name_ta) {
-        this.name_ta = name_ta;
+    public void setNameTA(String nameTA) {
+        this.nameTA = nameTA;
     }
 
     public String getFavicon() {
@@ -94,20 +103,52 @@ public class LocalAuthority extends BaseModel {
         this.logo = logo;
     }
 
-    public String getViewStatement() {
-        return viewStatement;
+    public String getViewStatementEN() {
+        return viewStatementEN;
     }
 
-    public void setViewStatement(String viewStatement) {
-        this.viewStatement = viewStatement;
+    public void setViewStatementEN(String viewStatementEN) {
+        this.viewStatementEN = viewStatementEN;
     }
 
-    public String getMissionStatement() {
-        return missionStatement;
+    public String getViewStatementSI() {
+        return viewStatementSI;
     }
 
-    public void setMissionStatement(String missionStatement) {
-        this.missionStatement = missionStatement;
+    public void setViewStatementSI(String viewStatementSI) {
+        this.viewStatementSI = viewStatementSI;
+    }
+
+    public String getViewStatementTA() {
+        return viewStatementTA;
+    }
+
+    public void setViewStatementTA(String viewStatementTA) {
+        this.viewStatementTA = viewStatementTA;
+    }
+
+    public String getMissionStatementEN() {
+        return missionStatementEN;
+    }
+
+    public void setMissionStatementEN(String missionStatementEN) {
+        this.missionStatementEN = missionStatementEN;
+    }
+
+    public String getMissionStatementSI() {
+        return missionStatementSI;
+    }
+
+    public void setMissionStatementSI(String missionStatementSI) {
+        this.missionStatementSI = missionStatementSI;
+    }
+
+    public String getMissionStatementTA() {
+        return missionStatementTA;
+    }
+
+    public void setMissionStatementTA(String missionStatementTA) {
+        this.missionStatementTA = missionStatementTA;
     }
 
     public District getDistrict() {

@@ -9,9 +9,14 @@ import java.util.List;
 @Entity
 @Table(name = "province")
 public class Province extends BaseModel {
-    @Column(columnDefinition = "TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci",
-            nullable = false)
-    private String name;
+    @Column(nullable = false)
+    private String nameEN;
+
+    @Column(nullable = false)
+    private String nameSI;
+
+    @Column(nullable = false)
+    private String nameTA;
 
     @OneToMany(mappedBy = "province")
     private List<District> districts;
@@ -19,12 +24,28 @@ public class Province extends BaseModel {
     public Province() {
     }
 
-    public String getName() {
-        return name;
+    public String getNameEN() {
+        return nameEN;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNameEN(String nameEN) {
+        this.nameEN = nameEN;
+    }
+
+    public String getNameSI() {
+        return nameSI;
+    }
+
+    public void setNameSI(String nameSI) {
+        this.nameSI = nameSI;
+    }
+
+    public String getNameTA() {
+        return nameTA;
+    }
+
+    public void setNameTA(String nameTA) {
+        this.nameTA = nameTA;
     }
 
     public List<District> getDistricts() {
