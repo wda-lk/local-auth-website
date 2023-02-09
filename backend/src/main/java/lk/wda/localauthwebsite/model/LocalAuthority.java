@@ -14,13 +14,13 @@ import java.util.List;
 @Table(name = "local_authority")
 @JsonIgnoreProperties({"images", "applications", "contacts"})
 public class LocalAuthority extends BaseModel {
-    @Column(nullable = false)
+    @Column(name = "name_en", nullable = false)
     private String nameEN;
 
-    @Column(nullable = false)
+    @Column(name = "name_si", nullable = false)
     private String nameSI;
 
-    @Column(nullable = false)
+    @Column(name = "name_ta", nullable = false)
     private String nameTA;
 
     @Column(columnDefinition = "TEXT")
@@ -29,22 +29,22 @@ public class LocalAuthority extends BaseModel {
     @Column(columnDefinition = "TEXT", nullable = false)
     private String logo;
 
-    @Column
+    @Column(name = "viewStatement_en")
     private String viewStatementEN;
 
-    @Column
+    @Column(name = "viewStatement_si")
     private String viewStatementSI;
 
-    @Column
+    @Column(name = "viewStatement_ta")
     private String viewStatementTA;
 
-    @Column
+    @Column(name = "missionStatement_en")
     private String missionStatementEN;
 
-    @Column
+    @Column(name = "missionStatement_si")
     private String missionStatementSI;
 
-    @Column
+    @Column(name = "missionStatement_ta")
     private String missionStatementTA;
 
     @ManyToOne

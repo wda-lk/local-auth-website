@@ -9,31 +9,31 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "contact")
 public class Contact extends BaseModel {
-    @Column(nullable = false)
+    @Column(name = "name_en", nullable = false)
     private String nameEN;
 
-    @Column(nullable = false)
+    @Column(name = "name_si", nullable = false)
     private String nameSI;
 
-    @Column(nullable = false)
+    @Column(name = "name_ta", nullable = false)
     private String nameTA;
 
-    @Column
+    @Column(name = "position_en")
     private String positionEN;
 
-    @Column
+    @Column(name = "position_si")
     private String positionSI;
 
-    @Column
+    @Column(name = "position_ta")
     private String positionTA;
 
-    @Column
+    @Column(name = "unit_en")
     private String unitEN;
 
-    @Column
+    @Column(name = "unit_si")
     private String unitSI;
 
-    @Column
+    @Column(name = "unit_ta")
     private String unitTA;
 
     @Column(nullable = false)

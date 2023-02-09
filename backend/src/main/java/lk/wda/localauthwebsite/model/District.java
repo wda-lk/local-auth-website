@@ -14,13 +14,13 @@ import java.util.List;
 @Table(name = "district")
 @JsonIgnoreProperties({"localAuthorities"})
 public class District extends BaseModel {
-    @Column(nullable = false)
+    @Column(name = "name_en", nullable = false)
     private String nameEN;
 
-    @Column(nullable = false)
+    @Column(name = "name_si", nullable = false)
     private String nameSI;
 
-    @Column(nullable = false)
+    @Column(name = "name_ta", nullable = false)
     private String nameTA;
 
     @OneToMany(mappedBy = "district")
