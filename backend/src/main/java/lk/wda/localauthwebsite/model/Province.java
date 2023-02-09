@@ -21,9 +21,6 @@ public class Province extends BaseModel {
     @OneToMany(mappedBy = "province")
     private List<District> districts;
 
-    public Province() {
-    }
-
     public String getNameEN() {
         return nameEN;
     }

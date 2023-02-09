@@ -60,9 +60,6 @@ public class LocalAuthority extends BaseModel {
     @OneToMany(mappedBy = "localAuthority")
     private List<Contact> contacts;
 
-    public LocalAuthority() {
-    }
-
     public String getNameEN() {
         return nameEN;
     }

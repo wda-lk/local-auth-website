@@ -19,9 +19,6 @@ public class Application extends BaseModel {
     @JoinColumn(name = "local_authority_id")
     private LocalAuthority localAuthority;
 
-    public Application() {
-    }
-
     public String getName() {
         return name;
     }

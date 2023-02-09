@@ -30,9 +30,6 @@ public class District extends BaseModel {
     @JoinColumn(name = "province_id")
     private Province province;
 
-    public District() {
-    }
-
     public String getNameEN() {
         return nameEN;
     }

@@ -43,9 +43,6 @@ public class Contact extends BaseModel {
     @JoinColumn(name = "local_authority_id")
     private LocalAuthority localAuthority;
 
-    public Contact() {
-    }
-
     public String getNameEN() {
         return nameEN;
     }
