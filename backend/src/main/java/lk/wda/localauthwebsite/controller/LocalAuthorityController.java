@@ -1,8 +1,10 @@
 package lk.wda.localauthwebsite.controller;
 
 import lk.wda.localauthwebsite.exception.ResourceNotFoundException;
+import lk.wda.localauthwebsite.model.District;
 import lk.wda.localauthwebsite.model.LocalAuthority;
 import lk.wda.localauthwebsite.model.Province;
+import lk.wda.localauthwebsite.repository.DistrictRepository;
 import lk.wda.localauthwebsite.repository.LocalAuthorityRepository;
 import lk.wda.localauthwebsite.repository.ProvinceRepository;
 import lk.wda.localauthwebsite.service.LocalAuthorityService;
@@ -20,29 +22,34 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("api/local-auths")
+@RequestMapping("api/auths")
 public class LocalAuthorityController {
     private final LocalAuthorityService localAuthorityService;
     private final LocalAuthorityRepository localAuthorityRepository;
     private final ProvinceRepository provinceRepository;
+    private final DistrictRepository districtRepository;
 
     public LocalAuthorityController(LocalAuthorityService localAuthorityService,
                                     LocalAuthorityRepository localAuthorityRepository,
-                                    ProvinceRepository provinceRepository) {
+                                    ProvinceRepository provinceRepository,
+                                    DistrictRepository districtRepository) {
         this.localAuthorityService = localAuthorityService;
         this.localAuthorityRepository = localAuthorityRepository;
         this.provinceRepository = provinceRepository;
+        this.districtRepository = districtRepository;
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Optional<LocalAuthority> getLocalAuthorityById(@PathVariable long id) {
+    public Optional<LocalAuthority> getLocalAuthorityById(
+            @PathVariable long id) {
         return localAuthorityRepository.findById(id);
     }
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<LocalAuthority> getAllLocalAuthoritiesByDistrictId(@RequestParam(name = "district-id") long id) {
+    public List<LocalAuthority> getAllLocalAuthoritiesByDistrictId(
+            @RequestParam(name = "district-id") long id) {
         return localAuthorityRepository.findAllByDistrictId(id);
     }
 
@@ -56,5 +63,12 @@ public class LocalAuthorityController {
     @ResponseStatus(HttpStatus.CREATED)
     public List<Province> createProvinces() throws ResourceNotFoundException {
         return localAuthorityService.createProvinces();
+    }
+
+    @GetMapping("/provinces/{id}/districts")
+    @ResponseStatus(HttpStatus.OK)
+    public List<District> getAllDistrictsByProvinceId(
+            @PathVariable long id) {
+        return districtRepository.findAllByProvinceId(id);
     }
 }
