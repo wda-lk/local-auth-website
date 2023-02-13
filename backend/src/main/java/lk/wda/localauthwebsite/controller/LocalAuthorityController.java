@@ -1,8 +1,11 @@
 package lk.wda.localauthwebsite.controller;
 
+import lk.wda.localauthwebsite.exception.ResourceNotFoundException;
 import lk.wda.localauthwebsite.model.LocalAuthority;
+import lk.wda.localauthwebsite.model.Province;
 import lk.wda.localauthwebsite.repository.LocalAuthorityRepository;
 import lk.wda.localauthwebsite.service.LocalAuthorityService;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,12 +30,6 @@ public class LocalAuthorityController {
         this.localAuthorityService = localAuthorityService;
     }
 
-    @PostMapping("/init")
-    @ResponseStatus(HttpStatus.CREATED)
-    public Object[] initiateData() {
-        return localAuthorityService.initDBData();
-    }
-
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Optional<LocalAuthority> getLocalAuthorityById(@PathVariable long id) {
@@ -43,5 +40,11 @@ public class LocalAuthorityController {
     @ResponseStatus(HttpStatus.OK)
     public List<LocalAuthority> getAllLocalAuthoritiesByDistrictId(@RequestParam(name = "district-id") long id) {
         return localAuthorityRepository.findAllByDistrictId(id);
+    }
+
+    @PostMapping("/provinces")
+    @ResponseStatus(HttpStatus.CREATED)
+    public List<Province> createProvinces() throws ResourceNotFoundException {
+        return localAuthorityService.createProvinces();
     }
 }

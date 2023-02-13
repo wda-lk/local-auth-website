@@ -1,13 +1,16 @@
 package lk.wda.localauthwebsite.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import java.util.List;
 
 @Entity
 @Table(name = "province")
+@JsonIgnoreProperties({"createdAt", "updatedAt", "districts"})
 public class Province extends BaseModel {
     @Column(name = "name_en", nullable = false)
     private String nameEN;
@@ -20,6 +23,15 @@ public class Province extends BaseModel {
 
     @OneToMany(mappedBy = "province")
     private List<District> districts;
+
+    public Province() {
+    }
+
+    public Province(String nameEN, String nameSI, String nameTA) {
+        this.nameEN = nameEN;
+        this.nameSI = nameSI;
+        this.nameTA = nameTA;
+    }
 
     public String getNameEN() {
         return nameEN;
