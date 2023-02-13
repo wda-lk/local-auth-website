@@ -4,6 +4,7 @@ import lk.wda.localauthwebsite.exception.ResourceNotFoundException;
 import lk.wda.localauthwebsite.model.LocalAuthority;
 import lk.wda.localauthwebsite.model.Province;
 import lk.wda.localauthwebsite.repository.LocalAuthorityRepository;
+import lk.wda.localauthwebsite.repository.ProvinceRepository;
 import lk.wda.localauthwebsite.service.LocalAuthorityService;
 
 import org.springframework.http.HttpStatus;
@@ -21,13 +22,16 @@ import java.util.Optional;
 @RestController
 @RequestMapping("api/local-auths")
 public class LocalAuthorityController {
-    private final LocalAuthorityRepository localAuthorityRepository;
     private final LocalAuthorityService localAuthorityService;
+    private final LocalAuthorityRepository localAuthorityRepository;
+    private final ProvinceRepository provinceRepository;
 
-    public LocalAuthorityController(LocalAuthorityRepository localAuthorityRepository,
-                                    LocalAuthorityService localAuthorityService) {
-        this.localAuthorityRepository = localAuthorityRepository;
+    public LocalAuthorityController(LocalAuthorityService localAuthorityService,
+                                    LocalAuthorityRepository localAuthorityRepository,
+                                    ProvinceRepository provinceRepository) {
         this.localAuthorityService = localAuthorityService;
+        this.localAuthorityRepository = localAuthorityRepository;
+        this.provinceRepository = provinceRepository;
     }
 
     @GetMapping("/{id}")
@@ -40,6 +44,12 @@ public class LocalAuthorityController {
     @ResponseStatus(HttpStatus.OK)
     public List<LocalAuthority> getAllLocalAuthoritiesByDistrictId(@RequestParam(name = "district-id") long id) {
         return localAuthorityRepository.findAllByDistrictId(id);
+    }
+
+    @GetMapping("/provinces")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Province> getAllProvince() {
+        return provinceRepository.findAll();
     }
 
     @PostMapping("/provinces")
