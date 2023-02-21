@@ -14,9 +14,14 @@ import java.util.List;
 @Table(name = "district")
 @JsonIgnoreProperties({"localAuthorities"})
 public class District extends BaseModel {
-    @Column(columnDefinition = "TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci",
-            nullable = false)
-    private String name;
+    @Column(name = "name_en", nullable = false)
+    private String nameEN;
+
+    @Column(name = "name_si", nullable = false)
+    private String nameSI;
+
+    @Column(name = "name_ta", nullable = false)
+    private String nameTA;
 
     @OneToMany(mappedBy = "district")
     private List<LocalAuthority> localAuthorities;
@@ -28,20 +33,49 @@ public class District extends BaseModel {
     public District() {
     }
 
-    public String getName() {
-        return name;
+    public District(String nameEN, String nameSI, String nameTA) {
+        this.nameEN = nameEN;
+        this.nameSI = nameSI;
+        this.nameTA = nameTA;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getNameEN() {
+        return nameEN;
+    }
+
+    public void setNameEN(String nameEN) {
+        this.nameEN = nameEN;
+    }
+
+    public String getNameSI() {
+        return nameSI;
+    }
+
+    public void setNameSI(String nameSI) {
+        this.nameSI = nameSI;
+    }
+
+    public String getNameTA() {
+        return nameTA;
+    }
+
+    public void setNameTA(String nameTA) {
+        this.nameTA = nameTA;
     }
 
     public List<LocalAuthority> getLocalAuthorities() {
         return localAuthorities;
     }
 
-    public void setLocalAuthorities(
-            List<LocalAuthority> localAuthorities) {
+    public void setLocalAuthorities(List<LocalAuthority> localAuthorities) {
         this.localAuthorities = localAuthorities;
+    }
+
+    public Province getProvince() {
+        return province;
+    }
+
+    public void setProvince(Province province) {
+        this.province = province;
     }
 }

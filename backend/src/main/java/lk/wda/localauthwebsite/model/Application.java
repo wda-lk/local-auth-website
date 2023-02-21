@@ -9,18 +9,15 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "application")
 public class Application extends BaseModel {
-    @Column(columnDefinition = "TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci")
+    @Column(nullable = false)
     private String name;
 
-    @Column(columnDefinition = "TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci")
+    @Column(nullable = false)
     private String file;
 
     @ManyToOne
     @JoinColumn(name = "local_authority_id")
     private LocalAuthority localAuthority;
-
-    public Application() {
-    }
 
     public String getName() {
         return name;

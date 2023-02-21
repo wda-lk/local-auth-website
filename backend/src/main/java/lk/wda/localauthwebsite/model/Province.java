@@ -1,17 +1,25 @@
 package lk.wda.localauthwebsite.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import java.util.List;
 
 @Entity
 @Table(name = "province")
+@JsonIgnoreProperties({"createdAt", "updatedAt", "districts"})
 public class Province extends BaseModel {
-    @Column(columnDefinition = "TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci",
-            nullable = false)
-    private String name;
+    @Column(name = "name_en", nullable = false)
+    private String nameEN;
+
+    @Column(name = "name_si", nullable = false)
+    private String nameSI;
+
+    @Column(name = "name_ta", nullable = false)
+    private String nameTA;
 
     @OneToMany(mappedBy = "province")
     private List<District> districts;
@@ -19,12 +27,34 @@ public class Province extends BaseModel {
     public Province() {
     }
 
-    public String getName() {
-        return name;
+    public Province(String nameSI, String nameEN, String nameTA) {
+        this.nameSI = nameSI;
+        this.nameEN = nameEN;
+        this.nameTA = nameTA;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getNameEN() {
+        return nameEN;
+    }
+
+    public void setNameEN(String nameEN) {
+        this.nameEN = nameEN;
+    }
+
+    public String getNameSI() {
+        return nameSI;
+    }
+
+    public void setNameSI(String nameSI) {
+        this.nameSI = nameSI;
+    }
+
+    public String getNameTA() {
+        return nameTA;
+    }
+
+    public void setNameTA(String nameTA) {
+        this.nameTA = nameTA;
     }
 
     public List<District> getDistricts() {
