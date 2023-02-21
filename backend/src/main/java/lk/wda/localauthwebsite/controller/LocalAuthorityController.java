@@ -1,5 +1,6 @@
 package lk.wda.localauthwebsite.controller;
 
+import lk.wda.localauthwebsite.exception.GoogleSheetConfigException;
 import lk.wda.localauthwebsite.model.LocalAuthority;
 import lk.wda.localauthwebsite.repository.LocalAuthorityRepository;
 import lk.wda.localauthwebsite.service.LocalAuthorityService;
@@ -30,7 +31,7 @@ public class LocalAuthorityController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public void initialise() {
+    public void initialise() throws GoogleSheetConfigException {
         localAuthorityService.initialise();
     }
 

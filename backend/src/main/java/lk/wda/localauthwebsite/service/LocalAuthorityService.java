@@ -8,6 +8,7 @@ import java.text.MessageFormat;
 import java.util.List;
 import java.util.Optional;
 
+import lk.wda.localauthwebsite.exception.GoogleSheetConfigException;
 import lk.wda.localauthwebsite.model.District;
 import lk.wda.localauthwebsite.model.LocalAuthority;
 import lk.wda.localauthwebsite.model.Province;
@@ -68,7 +69,7 @@ public class LocalAuthorityService {
         localAuthorityRepository.save(localAuthority);
     }
 
-    public void initialise() {
+    public void initialise() throws GoogleSheetConfigException {
         String range = "local_authority!A:P";
         try {
             Sheets sheetsService = GoogleSheetsUtil.getService();
@@ -98,9 +99,13 @@ public class LocalAuthorityService {
                 saveLocalAuthority(district.getNameEN(), localAuthority);
             }
         } catch (IOException e) {
-            log.error("Failed to locate credential files,", e);
+            String message = "Failed to locate credential files.";
+            log.error(message);
+            throw new GoogleSheetConfigException(message, e);
         } catch (GeneralSecurityException e) {
-            log.error("Failed with critical error,", e);
+            String message = "Failed due to a critical error.";
+            log.error(message);
+            throw new GoogleSheetConfigException(message, e);
         }
     }
 }
