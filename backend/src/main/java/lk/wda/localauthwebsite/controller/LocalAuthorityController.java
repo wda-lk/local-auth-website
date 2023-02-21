@@ -1,11 +1,7 @@
 package lk.wda.localauthwebsite.controller;
 
-import lk.wda.localauthwebsite.model.District;
 import lk.wda.localauthwebsite.model.LocalAuthority;
-import lk.wda.localauthwebsite.model.Province;
-import lk.wda.localauthwebsite.repository.DistrictRepository;
 import lk.wda.localauthwebsite.repository.LocalAuthorityRepository;
-import lk.wda.localauthwebsite.repository.ProvinceRepository;
 import lk.wda.localauthwebsite.service.LocalAuthorityService;
 
 import org.springframework.http.HttpStatus;
@@ -25,30 +21,11 @@ import java.util.Optional;
 public class LocalAuthorityController {
     private final LocalAuthorityService localAuthorityService;
     private final LocalAuthorityRepository localAuthorityRepository;
-    private final ProvinceRepository provinceRepository;
-    private final DistrictRepository districtRepository;
 
     public LocalAuthorityController(LocalAuthorityService localAuthorityService,
-                                    LocalAuthorityRepository localAuthorityRepository,
-                                    ProvinceRepository provinceRepository,
-                                    DistrictRepository districtRepository) {
+                                    LocalAuthorityRepository localAuthorityRepository) {
         this.localAuthorityService = localAuthorityService;
         this.localAuthorityRepository = localAuthorityRepository;
-        this.provinceRepository = provinceRepository;
-        this.districtRepository = districtRepository;
-    }
-
-    @GetMapping("/provinces")
-    @ResponseStatus(HttpStatus.OK)
-    public List<Province> getAllProvinces() {
-        return provinceRepository.findAll();
-    }
-
-    @GetMapping("/provinces/{id}/districts")
-    @ResponseStatus(HttpStatus.OK)
-    public List<District> getAllDistrictsByProvinceId(
-            @PathVariable long id) {
-        return districtRepository.findAllByProvinceId(id);
     }
 
     @GetMapping
@@ -58,16 +35,16 @@ public class LocalAuthorityController {
         return localAuthorityRepository.findAllByDistrictId(id);
     }
 
-    @PostMapping()
-    @ResponseStatus(HttpStatus.CREATED)
-    public void initialiseLocalAuthorities() {
-        localAuthorityService.initialiseLocalAuthorities();
-    }
-
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Optional<LocalAuthority> getLocalAuthorityById(
             @PathVariable long id) {
         return localAuthorityRepository.findById(id);
+    }
+
+    @PostMapping()
+    @ResponseStatus(HttpStatus.CREATED)
+    public void initialiseLocalAuthorities() {
+        localAuthorityService.initialiseLocalAuthorities();
     }
 }
