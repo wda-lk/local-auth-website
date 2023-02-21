@@ -28,6 +28,12 @@ public class LocalAuthorityController {
         this.localAuthorityRepository = localAuthorityRepository;
     }
 
+    @PostMapping()
+    @ResponseStatus(HttpStatus.CREATED)
+    public void initialise() {
+        localAuthorityService.initialise();
+    }
+
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<LocalAuthority> getAllLocalAuthoritiesByDistrictId(
@@ -40,11 +46,5 @@ public class LocalAuthorityController {
     public Optional<LocalAuthority> getLocalAuthorityById(
             @PathVariable long id) {
         return localAuthorityRepository.findById(id);
-    }
-
-    @PostMapping()
-    @ResponseStatus(HttpStatus.CREATED)
-    public void initialiseLocalAuthorities() {
-        localAuthorityService.initialiseLocalAuthorities();
     }
 }

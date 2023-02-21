@@ -33,9 +33,9 @@ public class District extends BaseModel {
     public District() {
     }
 
-    public District(String nameEN, String nameSI, String nameTA) {
-        this.nameEN = nameEN;
+    public District(String nameSI, String nameEN, String nameTA) {
         this.nameSI = nameSI;
+        this.nameEN = nameEN;
         this.nameTA = nameTA;
     }
 
