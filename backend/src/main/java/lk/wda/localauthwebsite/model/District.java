@@ -2,6 +2,7 @@ package lk.wda.localauthwebsite.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -23,7 +24,7 @@ public class District extends BaseModel {
     @Column(name = "name_ta", nullable = false)
     private String nameTA;
 
-    @OneToMany(mappedBy = "district")
+    @OneToMany(mappedBy = "district", cascade = CascadeType.REMOVE)
     private List<LocalAuthority> localAuthorities;
 
     @ManyToOne

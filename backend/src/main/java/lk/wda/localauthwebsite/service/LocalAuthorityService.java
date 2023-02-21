@@ -77,6 +77,7 @@ public class LocalAuthorityService {
                                                       .get(spreadsheet_id, range)
                                                       .execute()
                                                       .getValues();
+            // Clean database
             provinceRepository.deleteAll();
             for (int i = 1; i < rawData.size(); i++) {
                 List<Object> rawRow = rawData.get(i);

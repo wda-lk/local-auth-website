@@ -3,6 +3,7 @@ package lk.wda.localauthwebsite.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -21,7 +22,7 @@ public class Province extends BaseModel {
     @Column(name = "name_ta", nullable = false)
     private String nameTA;
 
-    @OneToMany(mappedBy = "province")
+    @OneToMany(mappedBy = "province", cascade = CascadeType.REMOVE)
     private List<District> districts;
 
     public Province() {
