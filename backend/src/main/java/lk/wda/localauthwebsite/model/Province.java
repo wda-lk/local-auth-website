@@ -27,9 +27,9 @@ public class Province extends BaseModel {
     public Province() {
     }
 
-    public Province(String nameEN, String nameSI, String nameTA) {
-        this.nameEN = nameEN;
+    public Province(String nameSI, String nameEN, String nameTA) {
         this.nameSI = nameSI;
+        this.nameEN = nameEN;
         this.nameTA = nameTA;
     }
 

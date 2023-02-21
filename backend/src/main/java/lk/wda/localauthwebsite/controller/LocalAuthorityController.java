@@ -1,6 +1,5 @@
 package lk.wda.localauthwebsite.controller;
 
-import lk.wda.localauthwebsite.exception.ResourceNotFoundException;
 import lk.wda.localauthwebsite.model.District;
 import lk.wda.localauthwebsite.model.LocalAuthority;
 import lk.wda.localauthwebsite.model.Province;
@@ -22,7 +21,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("api/auths")
+@RequestMapping("api/local-auths")
 public class LocalAuthorityController {
     private final LocalAuthorityService localAuthorityService;
     private final LocalAuthorityRepository localAuthorityRepository;
@@ -39,11 +38,17 @@ public class LocalAuthorityController {
         this.districtRepository = districtRepository;
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/provinces")
     @ResponseStatus(HttpStatus.OK)
-    public Optional<LocalAuthority> getLocalAuthorityById(
+    public List<Province> getAllProvinces() {
+        return provinceRepository.findAll();
+    }
+
+    @GetMapping("/provinces/{id}/districts")
+    @ResponseStatus(HttpStatus.OK)
+    public List<District> getAllDistrictsByProvinceId(
             @PathVariable long id) {
-        return localAuthorityRepository.findById(id);
+        return districtRepository.findAllByProvinceId(id);
     }
 
     @GetMapping
@@ -53,22 +58,16 @@ public class LocalAuthorityController {
         return localAuthorityRepository.findAllByDistrictId(id);
     }
 
-    @GetMapping("/provinces")
-    @ResponseStatus(HttpStatus.OK)
-    public List<Province> getAllProvince() {
-        return provinceRepository.findAll();
-    }
-
-    @PostMapping("/provinces")
+    @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public List<Province> createProvinces() throws ResourceNotFoundException {
-        return localAuthorityService.createProvinces();
+    public void initialiseLocalAuthorities() {
+        localAuthorityService.initialiseLocalAuthorities();
     }
 
-    @GetMapping("/provinces/{id}/districts")
+    @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public List<District> getAllDistrictsByProvinceId(
+    public Optional<LocalAuthority> getLocalAuthorityById(
             @PathVariable long id) {
-        return districtRepository.findAllByProvinceId(id);
+        return localAuthorityRepository.findById(id);
     }
 }
