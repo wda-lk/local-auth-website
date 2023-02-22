@@ -21,7 +21,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -70,17 +69,19 @@ public class GoogleSheetsUtil {
             Map<String, String> mappedRow = new HashMap<>();
             for (int j = 0; j < rawBodyRow.size(); j++) {
                 String rawBodyData = rawBodyRow.get(j).toString();
+                // empty cells should be marked as null
                 if (rawBodyData.isEmpty()) {
                     rawBodyData = null;
                 }
                 mappedRow.put(rawHeaderRow.get(j).toString(), rawBodyData);
             }
+            // google sheets drop the empty values in last few columns of a row. Cells included in these dropped
+            // columns should be marked as null
             if (rawBodyRow.size() < rawHeaderRow.size()) {
                 for (int j = rawBodyRow.size(); j < rawHeaderRow.size(); j++) {
                     mappedRow.put(rawHeaderRow.get(j).toString(), null);
                 }
             }
-
             mappedData.add(mappedRow);
         }
         return mappedData;
