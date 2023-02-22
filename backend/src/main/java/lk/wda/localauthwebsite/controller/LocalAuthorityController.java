@@ -31,8 +31,8 @@ public class LocalAuthorityController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public void initialise() throws GoogleSheetConfigException {
-        localAuthorityService.initialise();
+    public void createAuthorities() throws GoogleSheetConfigException {
+        localAuthorityService.createAuthorities();
     }
 
     @GetMapping

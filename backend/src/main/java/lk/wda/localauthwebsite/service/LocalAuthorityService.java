@@ -1,11 +1,10 @@
 package lk.wda.localauthwebsite.service;
 
-import com.google.api.services.sheets.v4.Sheets;
-
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.text.MessageFormat;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import lk.wda.localauthwebsite.exception.GoogleSheetConfigException;
@@ -25,11 +24,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class LocalAuthorityService {
     private static final Logger log = LoggerFactory.getLogger(LocalAuthorityService.class);
-    @Value("${google.sheet.id}")
-    private String spreadsheet_id;
     private final ProvinceRepository provinceRepository;
     private final DistrictRepository districtRepository;
     private final LocalAuthorityRepository localAuthorityRepository;
+    @Value("${google.sheet.id}")
+    private String spreadsheet_id;
 
     public LocalAuthorityService(ProvinceRepository provinceRepository,
                                  DistrictRepository districtRepository,
@@ -69,41 +68,35 @@ public class LocalAuthorityService {
         localAuthorityRepository.save(localAuthority);
     }
 
-    public void initialise() throws GoogleSheetConfigException {
+    public void createAuthorities() throws GoogleSheetConfigException {
         String range = "local_authority!A:P";
         try {
-            Sheets sheetsService = GoogleSheetsUtil.getService();
-            List<List<Object>> rawData = sheetsService.spreadsheets()
-                                                      .values()
-                                                      .get(spreadsheet_id, range)
-                                                      .execute()
-                                                      .getValues();
-            // Clean database
+            List<Map<String, String>> data = GoogleSheetsUtil.extractRawData(spreadsheet_id, range);
             provinceRepository.deleteAll();
-            for (int i = 1; i < rawData.size(); i++) {
-                List<Object> rawRow = rawData.get(i);
-                Province province = new Province(rawRow.get(0).toString(),
-                                                 rawRow.get(1).toString(),
-                                                 rawRow.get(2).toString());
+            for (int i = 1; i < data.size(); i++) {
+                Map<String, String> row = data.get(i);
+                Province province = new Province(row.get("province_si"),
+                                                 row.get("province_en"),
+                                                 row.get("province_ta"));
                 saveProvince(province);
-                District district = new District(rawRow.get(3).toString(),
-                                                 rawRow.get(4).toString(),
-                                                 rawRow.get(5).toString());
+                District district = new District(row.get("district_si"),
+                                                 row.get("district_en"),
+                                                 row.get("district_ta"));
                 saveDistrict(province.getNameEN(), district);
                 LocalAuthority localAuthority =
-                        new LocalAuthority(rawRow.get(6).toString(), rawRow.get(7).toString(), rawRow.get(8).toString(),
-                                           rawRow.get(9).toString(), rawRow.get(10).toString(),
-                                           rawRow.get(11).toString(), rawRow.get(12).toString(),
-                                           rawRow.get(13).toString(), rawRow.get(14).toString(),
-                                           rawRow.get(15).toString(), rawRow.get(15).toString());
+                        new LocalAuthority(row.get("name_si"), row.get("name_en"), row.get("name_ta"),
+                                           row.get("view_statement_si"), row.get("view_statement_en"),
+                                           row.get("view_statement_ta"), row.get("mission_statement_si"),
+                                           row.get("mission_statement_en"), row.get("mission_statement_ta"),
+                                           row.get("logo"), row.get("logo"));
                 saveLocalAuthority(district.getNameEN(), localAuthority);
             }
         } catch (IOException e) {
-            String message = "Failed to locate credential files.";
+            String message = "Failed to create local authorities, due to non existing credential files.";
             log.error(message);
             throw new GoogleSheetConfigException(message, e);
         } catch (GeneralSecurityException e) {
-            String message = "Failed due to a critical error.";
+            String message = "Failed to create local authorities, due to a critical error.";
             log.error(message);
             throw new GoogleSheetConfigException(message, e);
         }
