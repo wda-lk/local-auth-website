@@ -24,13 +24,13 @@ import org.springframework.stereotype.Service;
 public class ContactService {
     private static final Logger log = LoggerFactory.getLogger(ContactService.class);
     private final ContactRepository contactRepository;
-    private final LocalAuthorityRepository localAuthorityRepository;
+    private final LocalAuthorityService localAuthorityService;
     @Value("${google.sheet.id}")
     private String spreadsheet_id;
 
-    public ContactService(ContactRepository contactRepository, LocalAuthorityRepository localAuthorityRepository) {
+    public ContactService(ContactRepository contactRepository, LocalAuthorityService localAuthorityService) {
         this.contactRepository = contactRepository;
-        this.localAuthorityRepository = localAuthorityRepository;
+        this.localAuthorityService = localAuthorityService;
     }
 
     public List<Contact> createContacts() throws GoogleSheetConfigException, NoResourceFoundException {
@@ -41,13 +41,9 @@ public class ContactService {
             // extract sheet data
             List<Map<String, String>> data = GoogleSheetsUtil.extractRawData(spreadsheet_id, range);
             for (Map<String, String> row : data) {
-                // get the relevant local authority
-                String localAuthName = row.get("local_authority");
-                Optional<LocalAuthority> localAuthorityOptional = localAuthorityRepository.findByNameEN(localAuthName);
-                String message = MessageFormat.format("No Local Authority found for name: {0}", localAuthName);
-                log.error(message);
+                // validate the relevant local authority
                 LocalAuthority localAuthority =
-                        localAuthorityOptional.orElseThrow(() -> new NoResourceFoundException(message));
+                        localAuthorityService.validateLocalAuthority(row.get("local_authority"));
                 // create contact
                 Contact contact =
                         new Contact(row.get("name_si"), row.get("name_en"), row.get("name_ta"), row.get("tel_number"),

@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import lk.wda.localauthwebsite.exception.GoogleSheetConfigException;
+import lk.wda.localauthwebsite.exception.NoResourceFoundException;
 import lk.wda.localauthwebsite.model.District;
 import lk.wda.localauthwebsite.model.LocalAuthority;
 import lk.wda.localauthwebsite.model.Province;
@@ -104,5 +105,12 @@ public class LocalAuthorityService {
             log.error(message);
             throw new GoogleSheetConfigException(message, e);
         }
+    }
+
+    public LocalAuthority validateLocalAuthority(String name) throws NoResourceFoundException {
+        Optional<LocalAuthority> localAuthorityOptional = localAuthorityRepository.findByNameEN(name);
+        String message = MessageFormat.format("No Local Authority found for name: {0}", name);
+        log.error(message);
+        return localAuthorityOptional.orElseThrow(() -> new NoResourceFoundException(message));
     }
 }
