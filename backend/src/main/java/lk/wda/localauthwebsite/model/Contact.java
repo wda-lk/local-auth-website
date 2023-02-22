@@ -9,46 +9,55 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "contact")
 public class Contact extends BaseModel {
-    @Column(name = "name_en", nullable = false)
-    private String nameEN;
-
     @Column(name = "name_si", nullable = false)
     private String nameSI;
+
+    @Column(name = "name_en", nullable = false)
+    private String nameEN;
 
     @Column(name = "name_ta", nullable = false)
     private String nameTA;
 
-    @Column(name = "position_en")
-    private String positionEN;
+    @Column
+    private String telNumber;
 
     @Column(name = "position_si")
     private String positionSI;
 
+    @Column(name = "position_en")
+    private String positionEN;
+
     @Column(name = "position_ta")
     private String positionTA;
-
-    @Column(name = "unit_en")
-    private String unitEN;
 
     @Column(name = "unit_si")
     private String unitSI;
 
+    @Column(name = "unit_en")
+    private String unitEN;
+
     @Column(name = "unit_ta")
     private String unitTA;
-
-    @Column(nullable = false)
-    private String telNumber;
 
     @ManyToOne
     @JoinColumn(name = "local_authority_id")
     private LocalAuthority localAuthority;
 
-    public String getNameEN() {
-        return nameEN;
+    public Contact() {
     }
 
-    public void setNameEN(String nameEN) {
+    public Contact(String nameSI, String nameEN, String nameTA, String telNumber, String positionSI, String positionEN,
+                   String positionTA, String unitSI, String unitEN, String unitTA) {
+        this.nameSI = nameSI;
         this.nameEN = nameEN;
+        this.nameTA = nameTA;
+        this.telNumber = telNumber;
+        this.positionSI = positionSI;
+        this.positionEN = positionEN;
+        this.positionTA = positionTA;
+        this.unitSI = unitSI;
+        this.unitEN = unitEN;
+        this.unitTA = unitTA;
     }
 
     public String getNameSI() {
@@ -59,6 +68,14 @@ public class Contact extends BaseModel {
         this.nameSI = nameSI;
     }
 
+    public String getNameEN() {
+        return nameEN;
+    }
+
+    public void setNameEN(String nameEN) {
+        this.nameEN = nameEN;
+    }
+
     public String getNameTA() {
         return nameTA;
     }
@@ -67,12 +84,12 @@ public class Contact extends BaseModel {
         this.nameTA = nameTA;
     }
 
-    public String getPositionEN() {
-        return positionEN;
+    public String getTelNumber() {
+        return telNumber;
     }
 
-    public void setPositionEN(String positionEN) {
-        this.positionEN = positionEN;
+    public void setTelNumber(String telNumber) {
+        this.telNumber = telNumber;
     }
 
     public String getPositionSI() {
@@ -83,20 +100,20 @@ public class Contact extends BaseModel {
         this.positionSI = positionSI;
     }
 
+    public String getPositionEN() {
+        return positionEN;
+    }
+
+    public void setPositionEN(String positionEN) {
+        this.positionEN = positionEN;
+    }
+
     public String getPositionTA() {
         return positionTA;
     }
 
     public void setPositionTA(String positionTA) {
         this.positionTA = positionTA;
-    }
-
-    public String getUnitEN() {
-        return unitEN;
-    }
-
-    public void setUnitEN(String unitEN) {
-        this.unitEN = unitEN;
     }
 
     public String getUnitSI() {
@@ -107,20 +124,20 @@ public class Contact extends BaseModel {
         this.unitSI = unitSI;
     }
 
+    public String getUnitEN() {
+        return unitEN;
+    }
+
+    public void setUnitEN(String unitEN) {
+        this.unitEN = unitEN;
+    }
+
     public String getUnitTA() {
         return unitTA;
     }
 
     public void setUnitTA(String unitTA) {
         this.unitTA = unitTA;
-    }
-
-    public String getTelNumber() {
-        return telNumber;
-    }
-
-    public void setTelNumber(String telNumber) {
-        this.telNumber = telNumber;
     }
 
     public LocalAuthority getLocalAuthority() {

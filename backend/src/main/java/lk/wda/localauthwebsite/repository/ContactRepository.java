@@ -8,7 +8,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ContactRepository extends JpaRepository<Contact, Long> {
-
     Page<Contact> findAllByLocalAuthorityId(Long localAuthorityId, Pageable pageable);
-
 }

@@ -73,8 +73,7 @@ public class LocalAuthorityService {
         try {
             List<Map<String, String>> data = GoogleSheetsUtil.extractRawData(spreadsheet_id, range);
             provinceRepository.deleteAll();
-            for (int i = 1; i < data.size(); i++) {
-                Map<String, String> row = data.get(i);
+            for (Map<String, String> row : data) {
                 Province province = new Province(row.get("province_si"),
                                                  row.get("province_en"),
                                                  row.get("province_ta"));
