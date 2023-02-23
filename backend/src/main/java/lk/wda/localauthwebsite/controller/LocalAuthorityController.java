@@ -1,5 +1,8 @@
 package lk.wda.localauthwebsite.controller;
 
+import java.util.List;
+import java.util.Optional;
+
 import lk.wda.localauthwebsite.exception.GoogleSheetConfigException;
 import lk.wda.localauthwebsite.model.LocalAuthority;
 import lk.wda.localauthwebsite.repository.LocalAuthorityRepository;
@@ -13,9 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("api/local-auths")

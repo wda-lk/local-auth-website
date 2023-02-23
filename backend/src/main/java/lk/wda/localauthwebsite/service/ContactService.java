@@ -2,17 +2,14 @@ package lk.wda.localauthwebsite.service;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
-import java.text.MessageFormat;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import lk.wda.localauthwebsite.exception.GoogleSheetConfigException;
 import lk.wda.localauthwebsite.exception.NoResourceFoundException;
 import lk.wda.localauthwebsite.model.Contact;
 import lk.wda.localauthwebsite.model.LocalAuthority;
 import lk.wda.localauthwebsite.repository.ContactRepository;
-import lk.wda.localauthwebsite.repository.LocalAuthorityRepository;
 import lk.wda.localauthwebsite.utility.GoogleSheetsUtil;
 
 import org.slf4j.Logger;
@@ -36,15 +33,15 @@ public class ContactService {
     public List<Contact> createContacts() throws GoogleSheetConfigException, NoResourceFoundException {
         String range = "contact!A:K";
         try {
-            // clean table
+            // Clear table
             contactRepository.deleteAll();
-            // extract sheet data
+            // Extract sheet data
             List<Map<String, String>> data = GoogleSheetsUtil.extractRawData(spreadsheet_id, range);
             for (Map<String, String> row : data) {
-                // validate the relevant local authority
+                // Validate the relevant local authority
                 LocalAuthority localAuthority =
                         localAuthorityService.validateLocalAuthority(row.get("local_authority"));
-                // create contact
+                // Create contact
                 Contact contact =
                         new Contact(row.get("name_si"), row.get("name_en"), row.get("name_ta"), row.get("tel_number"),
                                     row.get("position_si"), row.get("position_en"), row.get("position_ta"),

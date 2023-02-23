@@ -2,6 +2,7 @@ package lk.wda.localauthwebsite.controller;
 
 import lk.wda.localauthwebsite.model.District;
 import lk.wda.localauthwebsite.repository.DistrictRepository;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

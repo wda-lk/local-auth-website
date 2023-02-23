@@ -1,5 +1,16 @@
 package lk.wda.localauthwebsite.utility;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.security.GeneralSecurityException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import com.google.api.client.auth.oauth2.AuthorizationCodeFlow;
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
@@ -14,17 +25,6 @@ import com.google.api.client.json.gson.GsonFactory;
 import com.google.api.client.util.store.FileDataStoreFactory;
 import com.google.api.services.sheets.v4.Sheets;
 import com.google.api.services.sheets.v4.SheetsScopes;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.security.GeneralSecurityException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class GoogleSheetsUtil {
     private static final String APPLICATION_NAME = "Local Authority Website";
@@ -69,14 +69,14 @@ public class GoogleSheetsUtil {
             Map<String, String> mappedRow = new HashMap<>();
             for (int j = 0; j < rawBodyRow.size(); j++) {
                 String rawBodyData = rawBodyRow.get(j).toString();
-                // empty cells should be marked as null
+                // Empty cells should be marked as null
                 if (rawBodyData.isEmpty()) {
                     rawBodyData = null;
                 }
                 mappedRow.put(rawHeaderRow.get(j).toString(), rawBodyData);
             }
-            // google sheets drop the empty values in last few columns of a row. Cells included in these dropped
-            // columns should be marked as null
+            // Google Sheets drop the empty values in last few columns of a row. Cells included in these dropped
+            // Columns should be marked as null
             if (rawBodyRow.size() < rawHeaderRow.size()) {
                 for (int j = rawBodyRow.size(); j < rawHeaderRow.size(); j++) {
                     mappedRow.put(rawHeaderRow.get(j).toString(), null);

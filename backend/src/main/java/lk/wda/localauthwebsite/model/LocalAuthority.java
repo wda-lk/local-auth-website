@@ -1,6 +1,6 @@
 package lk.wda.localauthwebsite.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,7 +8,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "local_authority")
@@ -63,10 +64,9 @@ public class LocalAuthority extends BaseModel {
     public LocalAuthority() {
     }
 
-    public LocalAuthority(String nameSI, String nameEN, String nameTA,
-                          String viewStatementSI, String viewStatementEN, String viewStatementTA,
-                          String missionStatementSI, String missionStatementEN, String missionStatementTA,
-                          String favicon, String logo) {
+    public LocalAuthority(String nameSI, String nameEN, String nameTA, String viewStatementSI, String viewStatementEN,
+                          String viewStatementTA, String missionStatementSI, String missionStatementEN,
+                          String missionStatementTA, String favicon, String logo) {
         this.nameSI = nameSI;
         this.nameEN = nameEN;
         this.nameTA = nameTA;

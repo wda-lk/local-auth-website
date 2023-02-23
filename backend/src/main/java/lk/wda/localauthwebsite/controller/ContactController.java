@@ -24,22 +24,25 @@ public class ContactController {
     private final ContactService contactService;
     private final ContactRepository contactRepository;
 
-    public ContactController(ContactService contactService, ContactRepository contactRepository) {
+    public ContactController(ContactService contactService,
+                             ContactRepository contactRepository) {
         this.contactService = contactService;
         this.contactRepository = contactRepository;
     }
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public Page<Contact> getAllContactsByLocalAuthorityId(@RequestParam(name = "local-auth-id") long id,
-                                                          @RequestParam(defaultValue = "0") int offset,
-                                                          @RequestParam(defaultValue = "10") int limit) {
+    public Page<Contact> getAllContactsByLocalAuthorityId(
+            @RequestParam(name = "local-auth-id") long id,
+            @RequestParam(defaultValue = "0") int offset,
+            @RequestParam(defaultValue = "10") int limit) {
         return contactRepository.findAllByLocalAuthorityId(id, PageRequest.of(offset, limit));
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public List<Contact> createContacts() throws GoogleSheetConfigException, NoResourceFoundException {
+    public List<Contact> createContacts() throws GoogleSheetConfigException,
+                                                 NoResourceFoundException {
         return contactService.createContacts();
     }
 }

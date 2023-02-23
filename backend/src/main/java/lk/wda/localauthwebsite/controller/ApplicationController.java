@@ -32,15 +32,17 @@ public class ApplicationController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public Page<Application> getAllApplicationsByLocalAuthorityId(@RequestParam(name = "local-auth-id") long id,
-                                                                  @RequestParam(defaultValue = "0") int offset,
-                                                                  @RequestParam(defaultValue = "10") int limit) {
+    public Page<Application> getAllApplicationsByLocalAuthorityId(
+            @RequestParam(name = "local-auth-id") long id,
+            @RequestParam(defaultValue = "0") int offset,
+            @RequestParam(defaultValue = "10") int limit) {
         return applicationRepository.findAllByLocalAuthorityId(id, PageRequest.of(offset, limit));
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public List<Application> createApplications() throws GoogleSheetConfigException, NoResourceFoundException {
+    public List<Application> createApplications() throws GoogleSheetConfigException,
+                                                         NoResourceFoundException {
         return applicationService.createApplications();
     }
 }

@@ -11,6 +11,7 @@ import lk.wda.localauthwebsite.model.Application;
 import lk.wda.localauthwebsite.model.LocalAuthority;
 import lk.wda.localauthwebsite.repository.ApplicationRepository;
 import lk.wda.localauthwebsite.utility.GoogleSheetsUtil;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -33,15 +34,15 @@ public class ApplicationService {
     public List<Application> createApplications() throws GoogleSheetConfigException, NoResourceFoundException {
         String range = "application!A:C";
         try {
-            // clean table
+            // Clear table
             applicationRepository.deleteAll();
-            // extract sheet data
+            // Extract sheet data
             List<Map<String, String>> data = GoogleSheetsUtil.extractRawData(spreadsheet_id, range);
             for (Map<String, String> row : data) {
-                // validate the relevant local authority
+                // Validate the relevant local authority
                 LocalAuthority localAuthority =
                         localAuthorityService.validateLocalAuthority(row.get("local_authority"));
-                // create contact
+                // Create application
                 Application application = new Application(row.get("name"), row.get("file"));
                 application.setLocalAuthority(localAuthority);
                 applicationRepository.save(application);

@@ -1,5 +1,7 @@
 package lk.wda.localauthwebsite.controller;
 
+import java.util.List;
+
 import lk.wda.localauthwebsite.exception.APIException;
 import lk.wda.localauthwebsite.exception.GoogleSheetConfigException;
 import lk.wda.localauthwebsite.exception.MalformedImageURL;
@@ -17,15 +19,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("api/images")
 public class ImageController {
     private final ImageService imageService;
     private final ImageRepository imageRepository;
 
-    public ImageController(ImageService imageService, ImageRepository imageRepository) {
+    public ImageController(ImageService imageService,
+                           ImageRepository imageRepository) {
         this.imageService = imageService;
         this.imageRepository = imageRepository;
     }

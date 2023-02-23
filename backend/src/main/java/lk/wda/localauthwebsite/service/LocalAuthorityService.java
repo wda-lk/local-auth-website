@@ -72,22 +72,22 @@ public class LocalAuthorityService {
     public void createAuthorities() throws GoogleSheetConfigException {
         String range = "local_authority!A:P";
         try {
-            // clean table
+            // Clear table
             provinceRepository.deleteAll();
-            // extract sheet data
+            // Extract sheet data
             List<Map<String, String>> data = GoogleSheetsUtil.extractRawData(spreadsheet_id, range);
             for (Map<String, String> row : data) {
-                // create province
+                // Create province
                 Province province = new Province(row.get("province_si"),
                                                  row.get("province_en"),
                                                  row.get("province_ta"));
                 saveProvince(province);
-                // create district
+                // Create district
                 District district = new District(row.get("district_si"),
                                                  row.get("district_en"),
                                                  row.get("district_ta"));
                 saveDistrict(province.getNameEN(), district);
-                // create local authority
+                // Create local authority
                 LocalAuthority localAuthority =
                         new LocalAuthority(row.get("name_si"), row.get("name_en"), row.get("name_ta"),
                                            row.get("view_statement_si"), row.get("view_statement_en"),
