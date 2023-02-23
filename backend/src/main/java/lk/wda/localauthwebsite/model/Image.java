@@ -12,12 +12,20 @@ public class Image extends BaseModel {
     @Column(columnDefinition = "TEXT", nullable = false)
     private String url;
 
-    @Column(length = 40)
+    @Column
     private String altText;
 
     @ManyToOne
     @JoinColumn(name = "local_authority_id")
     private LocalAuthority localAuthority;
+
+    public Image() {
+    }
+
+    public Image(String url, String altText) {
+        this.url = url;
+        this.altText = altText;
+    }
 
     public String getUrl() {
         return url;
