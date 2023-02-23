@@ -2,6 +2,7 @@ package lk.wda.localauthwebsite.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -52,13 +53,13 @@ public class LocalAuthority extends BaseModel {
     @JoinColumn(name = "district_id")
     private District district;
 
-    @OneToMany(mappedBy = "localAuthority")
+    @OneToMany(mappedBy = "localAuthority", cascade = CascadeType.REMOVE)
     private List<Image> images;
 
-    @OneToMany(mappedBy = "localAuthority")
+    @OneToMany(mappedBy = "localAuthority", cascade = CascadeType.REMOVE)
     private List<Application> applications;
 
-    @OneToMany(mappedBy = "localAuthority")
+    @OneToMany(mappedBy = "localAuthority", cascade = CascadeType.REMOVE)
     private List<Contact> contacts;
 
     public LocalAuthority() {
